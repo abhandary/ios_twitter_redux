@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MBProgressHUD
 
-class UserTimelineViewController: UIViewController {
+class UserTimelineViewController: TimeLineViewController {
 
     @IBOutlet weak var backdropImageView: UIImageView!
     @IBOutlet weak var whiteViewAroundProfileImageView: UIView!
@@ -22,11 +23,15 @@ class UserTimelineViewController: UIViewController {
     
     @IBOutlet weak var numberFollowersLabel: UILabel!
     
-    @IBOutlet weak var tableView: UITableView!
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
+        self.tableView.register(ReplyTweetCell.self, forCellReuseIdentifier: "ReplyTweetCell")
+        self.tableView.register(RetweetCell.self, forCellReuseIdentifier: "RetweetCell")
         
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
@@ -44,7 +49,29 @@ class UserTimelineViewController: UIViewController {
             numberFollowingLabel.text = "\(user.followingCount ?? 0)"
         }
 
+        
+        reloadTable()
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func reloadTable() {
+        
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
+        
+        if let user = User.currentUser {
+            UserAccount.currentUserAccount?.fetchTweets(user : user, success: { (tweets) in
+                hud.hide(animated: true);
+                self.tweets = tweets
+                self.refreshControl.endRefreshing()
+                self.tableView.reloadData()
+                }, error: { (receivedError) in
+                    hud.hide(animated: true);
+                    ViewUtils.showToast(view: self.networkErrorView)
+                    self.refreshControl.endRefreshing()
+                    print(receivedError)
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,3 +90,5 @@ class UserTimelineViewController: UIViewController {
     }
     */
 }
+
+

@@ -13,6 +13,7 @@ class UserAccount {
     
     let loginService = UserLoginService()
     var homeTimeLineService = UserTimeLineService()
+    var userTimeLineService = UserTimeLineService()
     
     var successCompletionHandler : ((Void) -> Void)?
     var errorCompletionHandler : ((Error) -> Void)?
@@ -87,6 +88,19 @@ class UserAccount {
         homeTimeLineService.fetchTweetsOlderThanLastFetch(success: success, error: error)
     }
 
+    func fetchTweets(user : User, success: @escaping (([Tweet]) -> Void),
+                     error:@escaping ((Error) -> Void)) {
+        
+        userTimeLineService.fetchTweets(user : user, success: success, error: error)
+    }
+    
+    func fetchTweetsOlderThanLastFetch(user : User, success: @escaping (([Tweet]) -> Void),
+                                       error:@escaping ((Error) -> Void)) {
+        
+        userTimeLineService.fetchTweetsOlderThanLastFetch(user : user, success: success, error: error)
+    }
+
+    
     
     func post(statusUpdate : String,  success: @escaping ((Tweet)->()), error:@escaping ((Error)->Void)) {
         homeTimeLineService.post(statusUpdate: statusUpdate, success: success, error: error)

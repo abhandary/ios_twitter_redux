@@ -18,6 +18,9 @@ let kFavorites         = "1.1/favorites/create.json"
 let kUnfavorites       = "1.1/favorites/destroy.json"
 let kRetweeters        = "1.1/statuses/retweeters/ids.json"
 
+let kUserTimeLine      = "1.1/statuses/user_timeline.json"
+
+let kUserParam  = "user_id"
 let kCountParam = "count"
 let kMaxIDParam = "max_id"
 
@@ -32,11 +35,13 @@ class UserTimeLineService {
     var tweetsLoading = false
     
     // MARK:- public routines
+    
+    // MARK:- home timeline
     func fetchTweets(success: @escaping (([Tweet]) -> Void),
                      error:@escaping ((Error) -> Void)) {
         
         let params = [kCountParam : kMaxTweetCountPerRequest]
-        fetchTweets(params: params, success: success, error: error)
+        fetchTweets(kHomeTimeLine, params: params, success: success, error: error)
     }
     
     func fetchTweetsOlderThanLastFetch(success: @escaping (([Tweet]) -> Void),
@@ -51,7 +56,32 @@ class UserTimeLineService {
                       kCountParam : kMaxTweetCountPerRequest,
                       kMaxIDParam :lastSeenLowestTweetID
                       ]
-        fetchTweets(params: params, success: success, error: error)
+        fetchTweets(kHomeTimeLine, params: params, success: success, error: error)
+    }
+    
+    // MARK: - user timeline
+    func fetchTweets(user : User, success: @escaping (([Tweet]) -> Void),
+                     error:@escaping ((Error) -> Void)) {
+        
+        let params = [kCountParam : kMaxTweetCountPerRequest,
+                      kUserParam : user.userID!]
+        fetchTweets(kUserTimeLine, params: params, success: success, error: error)
+    }
+    
+    func fetchTweetsOlderThanLastFetch(user : User, success: @escaping (([Tweet]) -> Void),
+                                       error:@escaping ((Error) -> Void)) {
+        
+        guard lastSeenLowestTweetID < Int.max else {
+            error(NSError(domain: "no more tweets available", code: 0, userInfo: nil));
+            return;
+        }
+        
+        let params = [
+            kCountParam : kMaxTweetCountPerRequest,
+            kMaxIDParam :lastSeenLowestTweetID,
+            kUserParam : user.userID!
+        ]
+        fetchTweets(kUserTimeLine, params: params, success: success, error: error)
     }
     
     
@@ -191,7 +221,7 @@ class UserTimeLineService {
         }
     }
     
-    internal func fetchTweets(params : [String : Any], success: @escaping (([Tweet]) -> Void),
+    internal func fetchTweets(_ timeLine : String, params : [String : Any], success: @escaping (([Tweet]) -> Void),
                      error:@escaping ((Error) -> Void)) {
         
         
