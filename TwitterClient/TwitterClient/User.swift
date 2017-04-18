@@ -20,6 +20,12 @@ class User  {
     
     var dictionary : NSDictionary?
     
+    var followersCount : Int?
+    var followingCount : Int?
+    
+    var profileBackgroundURL : URL?
+    var profileBackgroundColor : String?
+    
     init(dictionary : NSDictionary) {
         name = dictionary["name"] as? String
         screename = dictionary["screen_name"] as? String
@@ -28,11 +34,18 @@ class User  {
             profileURL = URL(string: urlString);
         }
         
+        if let urlString = dictionary["profile_background_image_url_https"] as? String {
+            profileBackgroundURL = URL(string: urlString)
+        }
+        
+        
         if let idFromDict = dictionary["id"] as? Int {
             userID = idFromDict
         }
         
         tagline = dictionary["description"] as? String
+        followersCount = dictionary["followers_count"] as? Int
+        followingCount = dictionary["following"] as? Int
         
         self.dictionary = dictionary as NSDictionary
     }
@@ -47,6 +60,7 @@ class User  {
                 if let userData = userData as? Data {
                     
                     let dictionary = try! JSONSerialization.jsonObject(with: userData, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary;
+                    print(dictionary)
                     _currentUser = User(dictionary: dictionary)
                 }
             }

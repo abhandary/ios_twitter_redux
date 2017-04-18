@@ -49,6 +49,9 @@ class TimeLineViewController: UIViewController  {
         
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        print("view will appear")
+    }
 
     func reloadTable() {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true);

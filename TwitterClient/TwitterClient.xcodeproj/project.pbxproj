@@ -23,6 +23,11 @@
 		E2154E661EA07B1400C8CEF2 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E651EA07B1400C8CEF2 /* TimeLineViewController.swift */; };
 		E2154E681EA07D0800C8CEF2 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2154E671EA07D0800C8CEF2 /* TweetCell.swift */; };
 		E24D21761EA4171A008C5C34 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24D21751EA4171A008C5C34 /* ViewUtils.swift */; };
+		E24D217A1EA5D827008C5C34 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24D21791EA5D827008C5C34 /* MenuViewController.swift */; };
+		E24D217D1EA5DFA6008C5C34 /* HamburgerMenuSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24D217C1EA5DFA6008C5C34 /* HamburgerMenuSegue.swift */; };
+		E24D217F1EA5E141008C5C34 /* HamburgerContentSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24D217E1EA5E141008C5C34 /* HamburgerContentSegue.swift */; };
+		E24D21811EA5E15A008C5C34 /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24D21801EA5E15A008C5C34 /* HamburgerViewController.swift */; };
+		E24D21841EA5F612008C5C34 /* UserTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24D21831EA5F612008C5C34 /* UserTimelineViewController.swift */; };
 		E2C7AE701EA1814D00B4384A /* RetweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7AE6F1EA1814D00B4384A /* RetweetCell.swift */; };
 		E2C7AE721EA1976D00B4384A /* TweetComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7AE711EA1976D00B4384A /* TweetComposeViewController.swift */; };
 		E2C7AE741EA1977800B4384A /* TweetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7AE731EA1977800B4384A /* TweetDetailViewController.swift */; };
@@ -51,6 +56,11 @@
 		E2154E651EA07B1400C8CEF2 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		E2154E671EA07D0800C8CEF2 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		E24D21751EA4171A008C5C34 /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
+		E24D21791EA5D827008C5C34 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		E24D217C1EA5DFA6008C5C34 /* HamburgerMenuSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HamburgerMenuSegue.swift; path = HamburgerViewController/HamburgerMenuSegue.swift; sourceTree = "<group>"; };
+		E24D217E1EA5E141008C5C34 /* HamburgerContentSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HamburgerContentSegue.swift; path = HamburgerViewController/HamburgerContentSegue.swift; sourceTree = "<group>"; };
+		E24D21801EA5E15A008C5C34 /* HamburgerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HamburgerViewController.swift; path = HamburgerViewController/HamburgerViewController.swift; sourceTree = "<group>"; };
+		E24D21831EA5F612008C5C34 /* UserTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimelineViewController.swift; sourceTree = "<group>"; };
 		E2C7AE6E1EA0B74800B4384A /* TwitterClient.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwitterClient.entitlements; sourceTree = "<group>"; };
 		E2C7AE6F1EA1814D00B4384A /* RetweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetCell.swift; sourceTree = "<group>"; };
 		E2C7AE711EA1976D00B4384A /* TweetComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetComposeViewController.swift; sourceTree = "<group>"; };
@@ -155,12 +165,14 @@
 			isa = PBXGroup;
 			children = (
 				E2154E391E9F364400C8CEF2 /* LoginViewController.swift */,
-				E2154E651EA07B1400C8CEF2 /* TimeLineViewController.swift */,
+				E24D21821EA5F5F5008C5C34 /* Timelines */,
 				E2154E671EA07D0800C8CEF2 /* TweetCell.swift */,
 				E2C7AE6F1EA1814D00B4384A /* RetweetCell.swift */,
 				E2C7AE711EA1976D00B4384A /* TweetComposeViewController.swift */,
 				E2C7AE731EA1977800B4384A /* TweetDetailViewController.swift */,
 				E2EB64A91EA3E6C200D9A232 /* ReplyTweetCell.swift */,
+				E24D217B1EA5DF42008C5C34 /* HamburgerViewController */,
+				E24D21791EA5D827008C5C34 /* MenuViewController.swift */,
 			);
 			name = "UI Layer";
 			sourceTree = "<group>";
@@ -181,6 +193,25 @@
 				E24D21751EA4171A008C5C34 /* ViewUtils.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		E24D217B1EA5DF42008C5C34 /* HamburgerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E24D21801EA5E15A008C5C34 /* HamburgerViewController.swift */,
+				E24D217C1EA5DFA6008C5C34 /* HamburgerMenuSegue.swift */,
+				E24D217E1EA5E141008C5C34 /* HamburgerContentSegue.swift */,
+			);
+			name = HamburgerViewController;
+			sourceTree = "<group>";
+		};
+		E24D21821EA5F5F5008C5C34 /* Timelines */ = {
+			isa = PBXGroup;
+			children = (
+				E2154E651EA07B1400C8CEF2 /* TimeLineViewController.swift */,
+				E24D21831EA5F612008C5C34 /* UserTimelineViewController.swift */,
+			);
+			name = Timelines;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,7 +348,11 @@
 				E2154E621EA0640B00C8CEF2 /* Tweet.swift in Sources */,
 				E2C7AE761EA2AF5900B4384A /* StatusUpdate.swift in Sources */,
 				E2EB64AA1EA3E6C200D9A232 /* ReplyTweetCell.swift in Sources */,
+				E24D217D1EA5DFA6008C5C34 /* HamburgerMenuSegue.swift in Sources */,
+				E24D21811EA5E15A008C5C34 /* HamburgerViewController.swift in Sources */,
 				E2154E681EA07D0800C8CEF2 /* TweetCell.swift in Sources */,
+				E24D21841EA5F612008C5C34 /* UserTimelineViewController.swift in Sources */,
+				E24D217F1EA5E141008C5C34 /* HamburgerContentSegue.swift in Sources */,
 				E2154E5D1EA0528800C8CEF2 /* UserLoginService.swift in Sources */,
 				E2C7AE741EA1977800B4384A /* TweetDetailViewController.swift in Sources */,
 				E2154E401E9F364400C8CEF2 /* TwitterClient.xcdatamodeld in Sources */,
@@ -325,6 +360,7 @@
 				E2C7AE721EA1976D00B4384A /* TweetComposeViewController.swift in Sources */,
 				E2154E661EA07B1400C8CEF2 /* TimeLineViewController.swift in Sources */,
 				E2154E601EA0619E00C8CEF2 /* User.swift in Sources */,
+				E24D217A1EA5D827008C5C34 /* MenuViewController.swift in Sources */,
 				E2154E381E9F364400C8CEF2 /* AppDelegate.swift in Sources */,
 				E2154E541E9F4D1700C8CEF2 /* UserTimeLineService.swift in Sources */,
 				E2154E521E9F4B0B00C8CEF2 /* UserAccount.swift in Sources */,

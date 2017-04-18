@@ -13,7 +13,9 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     let kTweetsNavigationViewController = "TweetsNavigationViewController"
+    let kHamburgerViewController = "HamburgerViewController"
     let kLoginViewController = "LoginViewController"
+    let kMenuViewController = "MenuViewController"
     
     
     var window: UIWindow?
@@ -126,8 +128,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
     
     func userLoggedIn() {
-        let nvc = storyboard.instantiateViewController(withIdentifier: kTweetsNavigationViewController) as! UINavigationController
-        window?.rootViewController = nvc
+        let hamburgerVC = storyboard.instantiateViewController(withIdentifier: kHamburgerViewController) as! HamburgerViewController
+        window?.rootViewController = hamburgerVC
     }
     
 }
