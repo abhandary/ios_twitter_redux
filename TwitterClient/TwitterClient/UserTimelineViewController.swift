@@ -29,10 +29,12 @@ class UserTimelineViewController: TimeLineViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
-        self.tableView.register(ReplyTweetCell.self, forCellReuseIdentifier: "ReplyTweetCell")
-        self.tableView.register(RetweetCell.self, forCellReuseIdentifier: "RetweetCell")
+        // self.tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
+        // self.tableView.register(ReplyTweetCell.self, forCellReuseIdentifier: "ReplyTweetCell")
+        // self.tableView.register(RetweetCell.self, forCellReuseIdentifier: "RetweetCell")
         
+        self.tableView.delegate = self
+
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
         whiteViewAroundProfileImageView.layer.cornerRadius = 5
