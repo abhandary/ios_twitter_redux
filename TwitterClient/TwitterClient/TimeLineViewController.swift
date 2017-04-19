@@ -19,6 +19,7 @@ class TimeLineViewController: UIViewController  {
     let kTweetDetailSegueFromRetweetCell = "tweetDetailSegueFromRetweet"
     let kTweetComposeSegue = "tweetComposeSegue"
     let kTweetReplySegue = "tweetReplySegue"
+    let kShowUserProfileSegue = "showUserProfileSegue"
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -97,6 +98,7 @@ class TimeLineViewController: UIViewController  {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        // show detail view for tweet
         if segue.identifier == kTweetDetailSegue ||
            segue.identifier == kTweetDetailSegueFromReplyToCell ||
             segue.identifier == kTweetDetailSegueFromRetweetCell,
@@ -108,6 +110,7 @@ class TimeLineViewController: UIViewController  {
             detailVC.tweetCell = cell
         }
         
+        // reply to tweet
         else if segue.identifier == kTweetReplySegue,
             let cell = sender as? TweetCell,
             let navVC = segue.destination as? UINavigationController,
@@ -116,6 +119,14 @@ class TimeLineViewController: UIViewController  {
             
             composeVC.inReplyToID = tweetID
             composeVC.inReplyToScreenName = cell.tweet.user?.screename
+        }
+        
+        // show user profile
+        else if segue.identifier == kShowUserProfileSegue,
+            let cell = sender as? TweetCell,
+            let userProfileVC = segue.destination as? UserTimelineViewController {
+            
+            userProfileVC.user = cell.tweet.user
         }
     }
 }
@@ -181,6 +192,10 @@ extension TimeLineViewController : TweetCellDelegate {
     
     func replyTapped(sender: TweetCell) {
         self.performSegue(withIdentifier: kTweetReplySegue, sender: sender)
+    }
+    
+    func thumbNailImageTapped(sender: TweetCell) {
+        self.performSegue(withIdentifier: kShowUserProfileSegue, sender: sender)
     }
 }
 

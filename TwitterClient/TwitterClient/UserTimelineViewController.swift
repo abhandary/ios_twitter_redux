@@ -22,25 +22,29 @@ class UserTimelineViewController: TimeLineViewController {
     @IBOutlet weak var numberFollowingLabel: UILabel!
     
     @IBOutlet weak var numberFollowersLabel: UILabel!
+
     
+    @IBOutlet weak var headerViewBottomHalf: UIView!
+    @IBOutlet weak var headerView: UIView!
     
+    var user : User?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // self.tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
-        // self.tableView.register(ReplyTweetCell.self, forCellReuseIdentifier: "ReplyTweetCell")
-        // self.tableView.register(RetweetCell.self, forCellReuseIdentifier: "RetweetCell")
+        // default to the current user is a user wasn't passed in
+        user = user ?? User.currentUser
         
         self.tableView.delegate = self
 
+        // set profile image and backdrop image
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
         whiteViewAroundProfileImageView.layer.cornerRadius = 5
         whiteViewAroundProfileImageView.clipsToBounds = true
         
-        if let  user = User.currentUser {
+        if let  user = user {
             if let profileURL = user.profileURL {
                 profileImageView.setImageWith(profileURL)
             }
@@ -61,7 +65,7 @@ class UserTimelineViewController: TimeLineViewController {
         
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
         
-        if let user = User.currentUser {
+        if let user = user {
             UserAccount.currentUserAccount?.fetchTweets(user : user, success: { (tweets) in
                 hud.hide(animated: true);
                 self.tweets = tweets
@@ -81,6 +85,15 @@ class UserTimelineViewController: TimeLineViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func thumbNailImageTapped(sender: TweetCell) {
+        // self.performSegue(withIdentifier: kShowUserProfileSegue, sender: sender)
+        print("thumbnail image tapped")
+    }
+   
+    
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        print("back button tapped")
+    }
 
     /*
     // MARK: - Navigation
@@ -91,6 +104,39 @@ class UserTimelineViewController: TimeLineViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        guard self.tweets != nil else { return; }
+        guard self.tweets!.count > 0 else { return; }
+        guard self.user != nil else { return; }
+        
+        // --- infinite scrolling ----
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+                isMoreDataLoading = true
+                let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
+                UserAccount.currentUserAccount?.fetchTweetsOlderThanLastFetch(user : user!,
+                                                                              success: { (tweets) in
+                    hud.hide(animated: true);
+                    self.isMoreDataLoading = false
+                    self.tweets?.append(contentsOf: tweets)
+                    self.tableView.reloadData()
+                    }, error: { (receivedError) in
+                        self.isMoreDataLoading = false
+                        hud.hide(animated: true);
+                        // @todo: show error banner
+                        print(receivedError)
+                })
+            }
+        }
+    }
+
 }
 
 

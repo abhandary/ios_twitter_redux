@@ -12,6 +12,7 @@ import UIKit
     func retweetTapped(sender : TweetCell)
     func favoriteTapped(sender : TweetCell)
     func replyTapped(sender : TweetCell)
+    func thumbNailImageTapped(sender : TweetCell)
 }
 
 class TweetCell: UITableViewCell {
@@ -110,6 +111,10 @@ class TweetCell: UITableViewCell {
         let replyTapGS = UITapGestureRecognizer(target: self, action: #selector(replyTapped))
         self.replyImageView.isUserInteractionEnabled = true
         self.replyImageView?.addGestureRecognizer(replyTapGS)
+        
+        let thumbNailImageTapGS = UITapGestureRecognizer(target: self, action: #selector(thumbNailImageTapped))
+        self.thumbNailImage.isUserInteractionEnabled = true
+        self.thumbNailImage?.addGestureRecognizer(thumbNailImageTapGS)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -129,6 +134,10 @@ class TweetCell: UITableViewCell {
     
     func favoriteTapped() {
         self.delegate?.favoriteTapped(sender: self)
+    }
+    
+    func thumbNailImageTapped() {
+        self.delegate?.thumbNailImageTapped(sender: self)
     }
 
     func updateRetweetDisplay() {
