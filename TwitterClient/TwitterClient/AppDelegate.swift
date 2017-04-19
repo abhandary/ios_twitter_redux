@@ -16,11 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     let kHamburgerViewController = "HamburgerViewController"
     let kLoginViewController = "LoginViewController"
     let kMenuViewController = "MenuViewController"
+    static let kUserTimeLineViewController = "UserTimeLineViewController"
     
     
     var window: UIWindow?
 
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    static let storyboard = UIStoryboard(name: "Main", bundle: nil)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -123,12 +124,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     // TimeLineViewControllerDelegate
     func userLoggedOut(notification : Notification) {
-        let loginVC = storyboard.instantiateViewController(withIdentifier: kLoginViewController)
+        let loginVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: kLoginViewController)
         window?.rootViewController = loginVC
     }
     
     func userLoggedIn() {
-        let hamburgerVC = storyboard.instantiateViewController(withIdentifier: kHamburgerViewController) as! HamburgerViewController
+        let hamburgerVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: kHamburgerViewController) as! HamburgerViewController
         window?.rootViewController = hamburgerVC
     }
     

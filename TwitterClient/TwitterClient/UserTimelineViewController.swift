@@ -31,10 +31,10 @@ class UserTimelineViewController: TimeLineViewController {
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
         // default to the current user is a user wasn't passed in
         user = user ?? User.currentUser
+
         
         self.tableView.delegate = self
 
@@ -55,17 +55,19 @@ class UserTimelineViewController: TimeLineViewController {
             numberFollowingLabel.text = "\(user.followingCount ?? 0)"
         }
 
+        // defer super till this view has been setup
+        super.viewDidLoad()
         
-        reloadTable()
-        
+
         // Do any additional setup after loading the view.
     }
     
     override func reloadTable() {
         
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
+
         
         if let user = user {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
             UserAccount.currentUserAccount?.fetchTweets(user : user, success: { (tweets) in
                 hud.hide(animated: true);
                 self.tweets = tweets
@@ -88,11 +90,22 @@ class UserTimelineViewController: TimeLineViewController {
     override func thumbNailImageTapped(sender: TweetCell) {
         // self.performSegue(withIdentifier: kShowUserProfileSegue, sender: sender)
         print("thumbnail image tapped")
+//        
+//        let newUserTimeLineVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: AppDelegate.kUserTimeLineViewController)
+//        
+//        let transition = CATransition()
+//        transition.duration = 0.5
+//        transition.type = kCATransitionPush
+//        transition.subtype = kCATransitionFromRight
+//        view.window!.layer.add(transition, forKey: kCATransition)
+//        present(newUserTimeLineVC, animated: false, completion: nil)
+
     }
    
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
         print("back button tapped")
+        dismiss(animated: false, completion: nil)
     }
 
     /*
