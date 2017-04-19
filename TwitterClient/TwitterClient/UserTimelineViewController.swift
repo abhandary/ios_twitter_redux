@@ -49,7 +49,7 @@ class UserTimelineViewController: TimeLineViewController {
                 profileImageView.setImageWith(profileURL)
             }
             userName.text = user.name
-            screenName.text = user.screename
+            screenName.text = "@\(user.screename!)"
             
             numberFollowersLabel.text = "\(user.followersCount ?? 0)"
             numberFollowingLabel.text = "\(user.followingCount ?? 0)"

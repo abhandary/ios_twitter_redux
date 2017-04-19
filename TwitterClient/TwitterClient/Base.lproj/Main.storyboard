@@ -139,7 +139,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="Zxs-9k-P7E"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -155,7 +155,7 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5M-ey-8WW">
                                                             <string key="text">Did you know that you can tell if someone is a programmer simplying by saying the word "timezones" and seeing if they cringe This is some more text and more and more and more and more and more and more and more</string>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -173,7 +173,7 @@
                                                         <constraint firstItem="Q1T-mY-l34" firstAttribute="leading" secondItem="2b7-H1-Oh6" secondAttribute="trailing" constant="5" id="hDj-rV-IhL"/>
                                                         <constraint firstItem="Ax2-YT-qZg" firstAttribute="centerY" secondItem="2b7-H1-Oh6" secondAttribute="centerY" id="kg7-fv-3Cc"/>
                                                         <constraint firstAttribute="bottom" secondItem="Z5M-ey-8WW" secondAttribute="bottom" constant="3" id="mEK-cs-5Sh"/>
-                                                        <constraint firstItem="Z5M-ey-8WW" firstAttribute="top" secondItem="2b7-H1-Oh6" secondAttribute="bottom" constant="14" id="meB-Z4-odx"/>
+                                                        <constraint firstItem="Z5M-ey-8WW" firstAttribute="top" secondItem="2b7-H1-Oh6" secondAttribute="bottom" constant="8" id="meB-Z4-odx"/>
                                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="nxX-IP-wcg"/>
                                                     </constraints>
                                                 </view>
@@ -280,7 +280,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="Igr-eH-Cf1"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -296,7 +296,7 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebX-Sf-EBt">
                                                             <string key="text">Did you know that you can tell if someone is a programmer simplying by saying the word "timezones" and seeing if they cringe This is some more text and more and more and more and more and more and more and more</string>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -462,7 +462,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wDT-Cb-F6f" userLabel="Name and Text View">
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Michael Moran" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4G-jS-75m">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -477,7 +477,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Did you know that you can tell if someone is a programmer simplying by saying the word &quot;timezones&quot; and seeing if they cringe" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oq1-mB-tbI">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -486,7 +486,7 @@
                                                     <constraints>
                                                         <constraint firstItem="h4G-jS-75m" firstAttribute="top" secondItem="wDT-Cb-F6f" secondAttribute="top" constant="10" id="8UY-yS-Vu0"/>
                                                         <constraint firstItem="h4G-jS-75m" firstAttribute="leading" secondItem="wDT-Cb-F6f" secondAttribute="leading" id="9h2-fA-QlN"/>
-                                                        <constraint firstItem="oq1-mB-tbI" firstAttribute="top" secondItem="h4G-jS-75m" secondAttribute="bottom" constant="14" id="Bk2-xP-Ro5"/>
+                                                        <constraint firstItem="oq1-mB-tbI" firstAttribute="top" secondItem="h4G-jS-75m" secondAttribute="bottom" constant="8" id="Bk2-xP-Ro5"/>
                                                         <constraint firstItem="kBy-ct-hQS" firstAttribute="leading" secondItem="h4G-jS-75m" secondAttribute="trailing" constant="5" id="Cqe-qI-qBH"/>
                                                         <constraint firstItem="oq1-mB-tbI" firstAttribute="leading" secondItem="wDT-Cb-F6f" secondAttribute="leading" id="DTs-o8-BLR"/>
                                                         <constraint firstAttribute="bottom" secondItem="oq1-mB-tbI" secondAttribute="bottom" id="KD2-Zl-rLr"/>
@@ -1155,7 +1155,7 @@
                         <viewControllerLayoutGuide type="bottom" id="fOM-87-Ssq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hCE-1X-gM6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hoe-8t-Q8t" userLabel="Header View">
@@ -1210,42 +1210,42 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbH-EM-OD2" userLabel="Header View Bottom Half">
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Axa Bhandary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hd-ya-r5V">
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@axa_bhandary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9G4-Lj-ktt">
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="97" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtX-YI-xEk" userLabel="Number Following">
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfM-GN-wPn">
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmd-Io-Izg" userLabel="Number of Followers">
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWERS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h36-Ct-wVv">
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gSI-U1-GsO" userLabel="Number of Tweets">
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TWEETS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOh-VD-FJf">
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1258,6 +1258,7 @@
                                             <constraint firstItem="8hd-ya-r5V" firstAttribute="leading" secondItem="tbH-EM-OD2" secondAttribute="leading" constant="20" id="7bY-Qj-6vz"/>
                                             <constraint firstItem="dmd-Io-Izg" firstAttribute="leading" secondItem="MfM-GN-wPn" secondAttribute="trailing" constant="10" id="B3f-pD-Qnb"/>
                                             <constraint firstItem="h36-Ct-wVv" firstAttribute="centerY" secondItem="dmd-Io-Izg" secondAttribute="centerY" id="INx-aZ-L0M"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VOh-VD-FJf" secondAttribute="trailing" constant="3" id="Ko6-cH-uh5"/>
                                             <constraint firstItem="9G4-Lj-ktt" firstAttribute="top" secondItem="8hd-ya-r5V" secondAttribute="bottom" constant="3" id="NTq-WY-g7o"/>
                                             <constraint firstItem="VOh-VD-FJf" firstAttribute="leading" secondItem="gSI-U1-GsO" secondAttribute="trailing" constant="7" id="RNa-4b-dRs"/>
                                             <constraint firstItem="VOh-VD-FJf" firstAttribute="centerY" secondItem="gSI-U1-GsO" secondAttribute="centerY" id="UdF-Sd-RiZ"/>
@@ -1305,7 +1306,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="IL6-Vh-zyO"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1321,7 +1322,7 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bU-sv-Cv3">
                                                             <string key="text">Did you know that you can tell if someone is a programmer simplying by saying the word "timezones" and seeing if they cringe This is some more text and more and more and more and more and more and more and more</string>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1332,7 +1333,7 @@
                                                         <constraint firstAttribute="bottom" secondItem="9bU-sv-Cv3" secondAttribute="bottom" constant="3" id="6T2-ol-zBn"/>
                                                         <constraint firstAttribute="trailing" secondItem="9bU-sv-Cv3" secondAttribute="trailing" constant="3" id="8kf-8I-74Y"/>
                                                         <constraint firstItem="Wt1-s4-1Vs" firstAttribute="leading" secondItem="hTI-Dn-PYJ" secondAttribute="trailing" constant="5" id="Bw9-5H-OYG"/>
-                                                        <constraint firstItem="9bU-sv-Cv3" firstAttribute="top" secondItem="hTI-Dn-PYJ" secondAttribute="bottom" constant="14" id="GoN-eE-Nx6"/>
+                                                        <constraint firstItem="9bU-sv-Cv3" firstAttribute="top" secondItem="hTI-Dn-PYJ" secondAttribute="bottom" constant="8" id="GoN-eE-Nx6"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="NsW-Sz-KVa"/>
                                                         <constraint firstAttribute="trailing" secondItem="L8Q-FC-csZ" secondAttribute="trailing" constant="8" id="Obz-a4-Tbm"/>
                                                         <constraint firstItem="L8Q-FC-csZ" firstAttribute="centerY" secondItem="hTI-Dn-PYJ" secondAttribute="centerY" id="VJw-nt-R8g"/>
@@ -1445,7 +1446,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="7VC-W0-ePF"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1461,7 +1462,7 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35j-RS-LZ8">
                                                             <string key="text">Did you know that you can tell if someone is a programmer simplying by saying the word "timezones" and seeing if they cringe This is some more text and more and more and more and more and more and more and more</string>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1626,7 +1627,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZFo-15-F8G" userLabel="Name and Text View">
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Michael Moran" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPu-a1-ywy">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1656,7 +1657,7 @@
                                                         <constraint firstItem="WOw-gu-s6l" firstAttribute="centerY" secondItem="UPu-a1-ywy" secondAttribute="centerY" id="JZe-BY-sgH"/>
                                                         <constraint firstAttribute="bottom" secondItem="qZa-1G-cHc" secondAttribute="bottom" id="PhW-VS-M6X"/>
                                                         <constraint firstItem="ndU-cc-e2l" firstAttribute="centerY" secondItem="UPu-a1-ywy" secondAttribute="centerY" id="Str-ir-XhI"/>
-                                                        <constraint firstItem="qZa-1G-cHc" firstAttribute="top" secondItem="UPu-a1-ywy" secondAttribute="bottom" constant="14" id="oQm-AK-MeI"/>
+                                                        <constraint firstItem="qZa-1G-cHc" firstAttribute="top" secondItem="UPu-a1-ywy" secondAttribute="bottom" constant="8" id="oQm-AK-MeI"/>
                                                         <constraint firstItem="UPu-a1-ywy" firstAttribute="leading" secondItem="ZFo-15-F8G" secondAttribute="leading" id="s51-k3-lD5"/>
                                                     </constraints>
                                                 </view>
@@ -1817,6 +1818,8 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Me" id="4Nz-YU-Hl7"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="backdropImageView" destination="vVU-1E-fbF" id="Xjy-AX-Lgf"/>
                         <outlet property="headerView" destination="Hoe-8t-Q8t" id="owm-eM-E12"/>
