@@ -8,8 +8,15 @@
 
 import UIKit
 
+
+@objc protocol AccountsCellDelegate {
+    
+}
+
 class AccountsCell: UITableViewCell {
 
+    weak var delegate : AccountsCellDelegate?
+    
     @IBOutlet weak var thumbNailImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userScreenName: UILabel!

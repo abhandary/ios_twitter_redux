@@ -34,6 +34,12 @@ class UserTimeLineService {
     
     var tweetsLoading = false
     
+    var oauthClient : OAuthClient!
+    
+    init(oauthClient : OAuthClient) {
+        self.oauthClient = oauthClient
+    }
+
     // MARK:- public routines
     
     // MARK:- home timeline
@@ -87,7 +93,7 @@ class UserTimeLineService {
     
     func currentUser(success : @escaping (User) -> (), error : @escaping (Error) -> ()) {
         
-        OAuthClient.sharedInstance.get(kVerifyCredentials,
+        oauthClient.get(kVerifyCredentials,
                                        parameters: nil,
                                        progress: nil,
                                        success: { (task, response) in
@@ -120,7 +126,7 @@ class UserTimeLineService {
         
         let requestURLString = String(format: kRetweet, retweetID)
         let params = ["id" : retweetID]
-        OAuthClient.sharedInstance.post(requestURLString,
+        oauthClient.post(requestURLString,
                                         parameters: params,
                                         progress: nil,
                                         success: { (task, response) in
@@ -140,7 +146,7 @@ class UserTimeLineService {
         
         let requestURLString = String(format: kUnretweet, unretweetID)
         let params = ["id" : unretweetID]
-        OAuthClient.sharedInstance.post(requestURLString,
+        oauthClient.post(requestURLString,
                                         parameters: params,
                                         progress: nil,
                                         success: { (task, response) in
@@ -161,7 +167,7 @@ class UserTimeLineService {
         
 
         let params = ["id" : favoriteTweetID]
-        OAuthClient.sharedInstance.post(kFavorites,
+        oauthClient.post(kFavorites,
                                         parameters: params,
                                         progress: nil,
                                         success: { (task, response) in
@@ -182,7 +188,7 @@ class UserTimeLineService {
         
         
         let params = ["id" : unfavoriteTweetID]
-        OAuthClient.sharedInstance.post(kUnfavorites,
+        oauthClient.post(kUnfavorites,
                                         parameters: params,
                                         progress: nil,
                                         success: { (task, response) in
@@ -205,7 +211,7 @@ class UserTimeLineService {
     
     internal func postStatusUpdate(params : [String : Any], success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
         
-        OAuthClient.sharedInstance.post(kPostStatusUpdate,
+        oauthClient.post(kPostStatusUpdate,
                                        parameters: params,
                                        progress: nil,
                                        success: { (task, response) in
@@ -225,7 +231,7 @@ class UserTimeLineService {
                      error:@escaping ((Error) -> Void)) {
         
         
-        OAuthClient.sharedInstance.get(timeLine,
+        oauthClient.get(timeLine,
                                        parameters: params,
                                        progress: nil,
                                        success: { (task, response) in

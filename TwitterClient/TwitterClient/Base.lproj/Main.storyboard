@@ -1873,6 +1873,51 @@
             </objects>
             <point key="canvasLocation" x="2213.5999999999999" y="1648.8755622188908"/>
         </scene>
+        <!--Add Account View Controller-->
+        <scene sceneID="Nay-1M-6nO">
+            <objects>
+                <viewController storyboardIdentifier="AddAccountViewController" id="ghn-VF-VNV" customClass="AddAccountViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="asq-ir-EKB"/>
+                        <viewControllerLayoutGuide type="bottom" id="E9m-Wr-s1f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OvN-hr-MUP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hc-1X-Xe9">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="I73-Q4-wVb"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Add Account" id="avy-wM-vlD">
+                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="KyP-nX-kGz"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cSy-Py-ykF">
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cSy-Py-ykF" firstAttribute="top" secondItem="0hc-1X-Xe9" secondAttribute="bottom" id="4Fl-pW-ih4"/>
+                            <constraint firstItem="cSy-Py-ykF" firstAttribute="leading" secondItem="OvN-hr-MUP" secondAttribute="leading" id="PJ4-UD-pOM"/>
+                            <constraint firstAttribute="trailing" secondItem="cSy-Py-ykF" secondAttribute="trailing" id="b3E-Qd-E6e"/>
+                            <constraint firstItem="0hc-1X-Xe9" firstAttribute="top" secondItem="OvN-hr-MUP" secondAttribute="top" id="gEo-qH-zgX"/>
+                            <constraint firstItem="E9m-Wr-s1f" firstAttribute="top" secondItem="cSy-Py-ykF" secondAttribute="bottom" id="sFH-Tv-aKX"/>
+                            <constraint firstAttribute="trailing" secondItem="0hc-1X-Xe9" secondAttribute="trailing" id="vP1-kn-Gvy"/>
+                            <constraint firstItem="0hc-1X-Xe9" firstAttribute="leading" secondItem="OvN-hr-MUP" secondAttribute="leading" id="yv0-VL-V3j"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="cSy-Py-ykF" id="qQp-n2-kD9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vQH-Qc-7un" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2282" y="2700"/>
+        </scene>
         <!--Accounts View Controller-->
         <scene sceneID="jiY-JH-4DQ">
             <objects>
@@ -1890,9 +1935,7 @@
                                     <constraint firstAttribute="height" constant="44" id="2Bd-Ft-cby"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Accounts" id="LZ8-Ot-8bq">
-                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="tmE-Cj-ep7"/>
-                                    </navigationItem>
+                                    <navigationItem title="Accounts" id="LZ8-Ot-8bq"/>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nUX-yj-xeM">
@@ -1996,8 +2039,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="doneButton" destination="tmE-Cj-ep7" id="2gE-dU-Hrj"/>
                         <outlet property="tableView" destination="nUX-yj-xeM" id="O3r-vf-Mwr"/>
+                        <segue destination="ghn-VF-VNV" kind="presentation" identifier="addAccountSegue" id="n69-Kt-Zhu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zE-MR-QIy" userLabel="First Responder" sceneMemberID="firstResponder"/>

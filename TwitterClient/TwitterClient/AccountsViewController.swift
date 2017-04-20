@@ -13,6 +13,9 @@ class AccountsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
+    // controller to login user into an existing account
+    var addAccountViewController  : AddAccountViewController?
+    
     
     var currentAccountIndex : Int!
     
@@ -58,6 +61,11 @@ extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
         if indexPath.row < UserAccount.allAccounts.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: kAccountsCell) as! AccountsCell
             cell.user = UserAccount.allAccounts[indexPath.row].user
+            if indexPath.row == currentAccountIndex {
+                cell.accessoryType = .checkmark
+            }  else {
+                cell.accessoryType = .none
+            }
             return cell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: kAddAccountCell)!
@@ -65,6 +73,49 @@ extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == UserAccount.allAccounts.count {
+            addNewAccount()
+        } else {
+            UserAccount.currentUserAccount = UserAccount.allAccounts[indexPath.row]
+            self.tableView.reloadData()
+        }
     }
+    
+    func addNewAccount() {
+        
+        let previousCurrentUserAccount = UserAccount.currentUserAccount
+        let userAccount = UserAccount()
+        
+        // need to preemptively switch current account, as the AppDelgate uses the
+        // 'current account' to pass the received token
+        UserAccount.currentUserAccount = userAccount
+        userAccount.loginUser(success: { () in
+            
+            // all is good here, able to add the new account
+            self.addAccountViewController?.dismiss(animated: true, completion:nil)
+            
+            // commit this new user account to the 'all accounts' list
+            UserAccount.allAccounts.append(userAccount)
+            }, error: { (error) in
+                
+                // failed to log in the user
+                self.addAccountViewController?.dismiss(animated: true, completion: nil)
+                
+                // restore the current user account to the previous current account
+                UserAccount.currentUserAccount = previousCurrentUserAccount
+        }) { (requestTokenURL) in
+            self.receivedRequestToken(url: requestTokenURL)
+        }
+    }
+    
+    func receivedRequestToken(url: URL) {
+        
+        self.addAccountViewController
+            = AppDelegate.storyboard.instantiateViewController(withIdentifier: AppDelegate.kAddAccountViewController)  as? AddAccountViewController
+        self.addAccountViewController?.url = url
+        self.present(self.addAccountViewController!, animated: true, completion: nil);
+    }
+    
+
 }

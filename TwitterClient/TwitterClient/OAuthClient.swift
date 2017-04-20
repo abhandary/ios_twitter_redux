@@ -24,4 +24,10 @@ class OAuthClient : BDBOAuth1SessionManager {
         return instance
     }
     
+    static func oauthAuthClient() -> OAuthClient {
+        let instance = OAuthClient(baseURL: URL(string: kOAuthBaseURL)!, consumerKey: kOAuthConsumerKey, consumerSecret: kOAuthConsumerSecret)!;
+        instance.requestSerializer.timeoutInterval = 5.0
+        return instance
+    }
+    
 }

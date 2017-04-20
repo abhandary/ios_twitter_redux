@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     static let kMenuViewController = "MenuViewController"
     static let kUserTimeLineViewController = "UserTimeLineViewController"
     static let kAccountsViewController = "AccountsViewController"
+    static let kAddAccountViewController = "AddAccountViewController"
     
     var window: UIWindow?
 

@@ -11,13 +11,20 @@ import Foundation
 
 class UserAccount {
     
-    let loginService = UserLoginService()
-    var homeTimeLineService = UserTimeLineService()
-    var userTimeLineService = UserTimeLineService()
+    var loginService : UserLoginService!
+    var homeTimeLineService : UserTimeLineService!
+    var userTimeLineService : UserTimeLineService!
     
     var successCompletionHandler : ((Void) -> Void)?
     var errorCompletionHandler : ((Error) -> Void)?
     
+    init() {
+        
+        let oauthClient = OAuthClient.oauthAuthClient()
+        loginService = UserLoginService(oauthClient: oauthClient)
+        homeTimeLineService = UserTimeLineService(oauthClient: oauthClient)
+        userTimeLineService = UserTimeLineService(oauthClient: oauthClient)
+    }
     
     static var _allAccounts : [UserAccount]?
     static var allAccounts : [UserAccount]! {

@@ -37,6 +37,7 @@
 		E2C7AE761EA2AF5900B4384A /* StatusUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C7AE751EA2AF5900B4384A /* StatusUpdate.swift */; };
 		E2EB64AA1EA3E6C200D9A232 /* ReplyTweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EB64A91EA3E6C200D9A232 /* ReplyTweetCell.swift */; };
 		E2EF6DF81EA879B300A8BFDB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EF6DF71EA879B300A8BFDB /* TabBarViewController.swift */; };
+		E2EF6DFA1EA89CB300A8BFDB /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EF6DF91EA89CB300A8BFDB /* AddAccountViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		E2C7AE751EA2AF5900B4384A /* StatusUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusUpdate.swift; sourceTree = "<group>"; };
 		E2EB64A91EA3E6C200D9A232 /* ReplyTweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyTweetCell.swift; sourceTree = "<group>"; };
 		E2EF6DF71EA879B300A8BFDB /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		E2EF6DF91EA89CB300A8BFDB /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				E24D21791EA5D827008C5C34 /* MenuViewController.swift */,
 				E24D21871EA83A48008C5C34 /* AccountsViewController.swift */,
 				E2EF6DF71EA879B300A8BFDB /* TabBarViewController.swift */,
+				E2EF6DF91EA89CB300A8BFDB /* AddAccountViewController.swift */,
 			);
 			name = "UI Layer";
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				E2154E3A1E9F364400C8CEF2 /* LoginViewController.swift in Sources */,
 				E2C7AE721EA1976D00B4384A /* TweetComposeViewController.swift in Sources */,
 				E2154E661EA07B1400C8CEF2 /* TimeLineViewController.swift in Sources */,
+				E2EF6DFA1EA89CB300A8BFDB /* AddAccountViewController.swift in Sources */,
 				E2154E601EA0619E00C8CEF2 /* User.swift in Sources */,
 				E24D217A1EA5D827008C5C34 /* MenuViewController.swift in Sources */,
 				E2154E381E9F364400C8CEF2 /* AppDelegate.swift in Sources */,

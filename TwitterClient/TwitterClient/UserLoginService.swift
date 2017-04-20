@@ -29,6 +29,12 @@ class UserLoginService {
     var successCompletionHandler: ((Void) -> Void)?
     var receivedRequestTokenHandler: ((URL) -> Void)?
     
+    var oauthClient : OAuthClient!
+    
+    init(oauthClient : OAuthClient) {
+        self.oauthClient = oauthClient
+    }
+    
     // MARK: - public routines
     func loginUser(success:@escaping((Void) -> Void),
                    error: @escaping((Error) -> Void),
@@ -38,8 +44,8 @@ class UserLoginService {
         self.successCompletionHandler = success
         self.receivedRequestTokenHandler = receivedRequestToken
         
-        OAuthClient.sharedInstance.deauthorize()
-        OAuthClient.sharedInstance.fetchRequestToken(withPath: kRequestTokenPath,
+        oauthClient.deauthorize()
+        oauthClient.fetchRequestToken(withPath: kRequestTokenPath,
                                                        method: kRequestTokenMethod,
                                                        callbackURL: URL(string:kCallbackURL)!,
                                                        scope: nil,
@@ -66,11 +72,11 @@ class UserLoginService {
         
         if let urlQuery = url.query {
             
-            OAuthClient.sharedInstance.fetchAccessToken(withPath: kAccessTokenPath,
+            oauthClient.fetchAccessToken(withPath: kAccessTokenPath,
                                                         method: kAccessTokenMethod,
                                                         requestToken: BDBOAuth1Credential(queryString: urlQuery),
                                                         success: { (accessToken) in
-                                                            OAuthClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
+                                                            self.oauthClient.requestSerializer.saveAccessToken(accessToken)
                                                             self.successCompletionHandler?()
                                                             success()
                                                             
@@ -84,11 +90,11 @@ class UserLoginService {
     }
     
     func logoutUser() {
-        OAuthClient.sharedInstance.deauthorize()
+        oauthClient.deauthorize()
     }
     
     internal func received(requestToken : String) {
-        let authURL = OAuthClient.sharedInstance.baseURL!.absoluteString
+        let authURL = oauthClient.baseURL!.absoluteString
         let fullURL = authURL + kAuthorizePath + "?\(kRequestTokenParam)=\(requestToken)"
         if let url = URL(string: fullURL) {
             self.receivedRequestTokenHandler?(url)

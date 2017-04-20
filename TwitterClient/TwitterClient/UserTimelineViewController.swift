@@ -17,6 +17,9 @@ enum AccountViewState {
 
 class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDelegate {
 
+    let kAddAccountSegue   = "addAccountSegue"
+    let kUserAccountsSegue = "userAccountsSegue"
+    
     @IBOutlet weak var maskView: UIView!
     
     // top level view constraints
@@ -44,13 +47,15 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     @IBOutlet weak var headerViewBottomHalf: UIView!
     @IBOutlet weak var headerView: UIView!
     
+    // view list of accounts, to enable switching accounts
     var accountsVC : AccountsViewController?
     var accountsVCView : UIView?
+    
     var user : User?
     
     let kMeTab = 1
     
-    let kUserAccountsSegue = "userAccountsSegue"
+
     
     var accountViewState : AccountViewState = .notPresented
     
@@ -148,7 +153,6 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
                     self.view.layoutIfNeeded()
                     let yOffset : CGFloat = (44.0 * 2.0).adding(CGFloat(55 * UserAccount.allAccounts.count)).adding(20)
                     self.accountsVCView?.frame = (self.accountsVCView!.frame.offsetBy(dx: 0, dy: yOffset))
-                
                 }, completion: { (boolVal) in
                     // self.accountsVCView?.removeFromSuperview()
                     // self.accountsVC?.removeFromParentViewController()
@@ -216,7 +220,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     }
     
     override func thumbNailImageTapped(sender: TweetCell) {
-        // self.performSegue(withIdentifier: kShowUserProfileSegue, sender: sender)
+
         print("thumbnail image tapped")
 //        
 //        let newUserTimeLineVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: AppDelegate.kUserTimeLineViewController)
@@ -236,6 +240,10 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         dismiss(animated: false, completion: nil)
     }
 
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 
