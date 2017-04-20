@@ -9,8 +9,25 @@
 import UIKit
 import MBProgressHUD
 
-class UserTimelineViewController: TimeLineViewController {
+enum AccountViewState {
+    case notPresented
+    case partiallyPresented
+    case presentedFullScreen
+}
 
+class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDelegate {
+
+    @IBOutlet weak var maskView: UIView!
+    
+    // top level view constraints
+    @IBOutlet weak var topLevelViewToTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topLevelViewTrailingSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topLevelViewLeadingSpaceConstraint: NSLayoutConstraint!
+    
+    
+    
+    @IBOutlet weak var topLevelView: UIView!
+    
     @IBOutlet weak var backdropImageView: UIImageView!
     @IBOutlet weak var whiteViewAroundProfileImageView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -27,13 +44,40 @@ class UserTimelineViewController: TimeLineViewController {
     @IBOutlet weak var headerViewBottomHalf: UIView!
     @IBOutlet weak var headerView: UIView!
     
+    var accountsVC : AccountsViewController?
+    var accountsVCView : UIView?
     var user : User?
     
+    let kMeTab = 1
+    
+    let kUserAccountsSegue = "userAccountsSegue"
+    
+    var accountViewState : AccountViewState = .notPresented
     
     override func viewDidLoad() {
         
+        
+        // setup long press gesture recognizer
+        let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+        longPressGR.delegate = self
+        self.tabBarController!.tabBar.addGestureRecognizer(longPressGR)
+        
         // default to the current user is a user wasn't passed in
         user = user ?? UserAccount.currentUserAccount.user
+
+        let panGR = UIPanGestureRecognizer(target: self, action: #selector(headeriewPanGesture(_:)));
+        headerView.addGestureRecognizer(panGR)
+        
+        // setup tap gs on mask view
+        let tapGS = UITapGestureRecognizer(target: self, action: #selector(maskViewTapped))
+        maskView.addGestureRecognizer(tapGS)
+        
+        // setup accounts view
+        accountsVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: AppDelegate.kAccountsViewController) as? AccountsViewController
+        accountsVCView = accountsVC?.view
+        self.tabBarController?.view.addSubview(accountsVCView!)
+        accountsVCView?.frame = (accountsVCView?.frame.offsetBy(dx: 0, dy: self.view.frame.size.height))!
+        self.tabBarController?.addChildViewController(accountsVC!)
 
         
         self.tableView.delegate = self
@@ -62,9 +106,93 @@ class UserTimelineViewController: TimeLineViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func reloadTable() {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return self.tabBarController!.tabBar.selectedItem!.tag == kMeTab;
+    }
+    
+    func longPress(gestureRecognizer: UIGestureRecognizer) {
         
+        guard accountViewState == .notPresented else { return; }
+        
+        accountsVC?.didMove(toParentViewController: self)
 
+        maskView.backgroundColor = .black
+        
+        self.maskView.alpha = 0.3
+        self.topLevelViewToTopConstraint.constant = 15
+        self.topLevelViewLeadingSpaceConstraint.constant = 15
+        self.topLevelViewTrailingSpaceConstraint.constant = 15
+        
+        accountViewState = .partiallyPresented
+        
+        UIView.animate(withDuration: 0.4) {
+            
+            self.view.layoutIfNeeded()
+            let yOffset : CGFloat = (44.0 * 2.0).adding(CGFloat(55 * UserAccount.allAccounts.count)).adding(20)
+            self.accountsVCView?.frame = (self.accountsVCView!.frame.offsetBy(dx: 0, dy: -yOffset))
+        }
+    }
+    
+    
+    func maskViewTapped() {
+        
+        if let _ = accountsVC {
+
+            self.maskView.alpha = 0.0
+            self.topLevelViewToTopConstraint.constant = 0
+            self.topLevelViewLeadingSpaceConstraint.constant = 0
+            self.topLevelViewTrailingSpaceConstraint.constant = 0
+            
+            UIView.animate(withDuration: 0.4, animations: {
+
+                    self.view.layoutIfNeeded()
+                    let yOffset : CGFloat = (44.0 * 2.0).adding(CGFloat(55 * UserAccount.allAccounts.count)).adding(20)
+                    self.accountsVCView?.frame = (self.accountsVCView!.frame.offsetBy(dx: 0, dy: yOffset))
+                
+                }, completion: { (boolVal) in
+                    // self.accountsVCView?.removeFromSuperview()
+                    // self.accountsVC?.removeFromParentViewController()
+                    self.accountViewState = .notPresented
+            })
+        }
+    }
+
+    @IBAction func maskViewPanGesture(_ sender: UIPanGestureRecognizer) {
+        
+        let velocity = sender.velocity(in: self.view)
+        let point = sender.translation(in: self.view)
+        print(point)
+        print(velocity)
+
+            
+    }
+
+    func headeriewPanGesture(_ sender: UIPanGestureRecognizer) {
+        
+        let velocity = sender.velocity(in: self.view)
+        let point = sender.translation(in: self.view)
+        print(point)
+        print(velocity)
+        
+        if sender.state == .began {
+            if velocity.y > 0 {
+                self.topLevelViewToTopConstraint.constant = -(self.headerView.frame.height - 44)
+            } else {
+                self.topLevelViewToTopConstraint.constant = 0
+            }
+        } else if sender.state == .changed {
+            self.topLevelViewToTopConstraint.constant = point.y
+        } else {
+            if velocity.y > 0 {
+                self.topLevelViewToTopConstraint.constant = 0
+            } else {
+                self.topLevelViewToTopConstraint.constant = -(self.headerView.frame.height - 44)
+            }
+        }
+    }
+
+    
+    override func reloadTable() {
         
         if let user = user {
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true);

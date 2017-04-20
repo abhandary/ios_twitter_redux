@@ -44,6 +44,7 @@ class UserAccount {
                 _currentUserAccount?.user = nil
             }
             _currentUserAccount = userAccount
+            User.currentUser = userAccount.user
             _currentUserAccount?.isCurrentUserAccount = true
         }
         
@@ -52,6 +53,7 @@ class UserAccount {
                 _currentUserAccount = UserAccount()
                 _currentUserAccount?.isCurrentUserAccount = true
                 _currentUserAccount?.user = User.currentUser
+                self.allAccounts.append(_currentUserAccount!)
             }
             return _currentUserAccount
         }

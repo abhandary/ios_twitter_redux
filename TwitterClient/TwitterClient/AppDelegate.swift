@@ -12,12 +12,12 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
 
-    let kTweetsNavigationViewController = "TweetsNavigationViewController"
-    let kHamburgerViewController = "HamburgerViewController"
-    let kLoginViewController = "LoginViewController"
-    let kMenuViewController = "MenuViewController"
+    static let kTweetsNavigationViewController = "TweetsNavigationViewController"
+    static let kHamburgerViewController = "HamburgerViewController"
+    static let kLoginViewController = "LoginViewController"
+    static let kMenuViewController = "MenuViewController"
     static let kUserTimeLineViewController = "UserTimeLineViewController"
-    
+    static let kAccountsViewController = "AccountsViewController"
     
     var window: UIWindow?
 
@@ -124,12 +124,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     // TimeLineViewControllerDelegate
     func userLoggedOut(notification : Notification) {
-        let loginVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: kLoginViewController)
+        let loginVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: AppDelegate.kLoginViewController)
         window?.rootViewController = loginVC
     }
     
     func userLoggedIn() {
-        let hamburgerVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: kHamburgerViewController) as! HamburgerViewController
+        let hamburgerVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: AppDelegate.kHamburgerViewController) as! HamburgerViewController
         window?.rootViewController = hamburgerVC
     }
     

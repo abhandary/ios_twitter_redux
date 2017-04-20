@@ -11,15 +11,18 @@ import UIKit
 class AccountsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     
     
     var currentAccountIndex : Int!
     
     let kAccountsCell = "AccountsCell"
+    let kAddAccountCell = "AddAccountCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         
         // get the index corresponding to the current user
         for ix in 0..<UserAccount.allAccounts.count {
@@ -47,13 +50,18 @@ class AccountsViewController: UIViewController {
 extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return UserAccount.allAccounts.count
+        return UserAccount.allAccounts.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kAccountsCell) as! AccountsCell
-        cell.user = UserAccount.allAccounts[indexPath.row].user
-        return cell
+        
+        if indexPath.row < UserAccount.allAccounts.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: kAccountsCell) as! AccountsCell
+            cell.user = UserAccount.allAccounts[indexPath.row].user
+            return cell
+        } else {
+            return tableView.dequeueReusableCell(withIdentifier: kAddAccountCell)!
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
