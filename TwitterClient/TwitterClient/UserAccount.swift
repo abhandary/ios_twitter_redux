@@ -19,7 +19,21 @@ class UserAccount {
     var errorCompletionHandler : ((Error) -> Void)?
     
     
+    static var _allAccounts : [UserAccount]?
+    static var allAccounts : [UserAccount]! {
+        set (allAccounts) {
+            _allAccounts = allAccounts
+        }
+        get {
+            if _allAccounts == nil {
+                _allAccounts = [UserAccount]()
+            }
+            return _allAccounts
+        }
+    }
+    
     var user : User?
+    var isCurrentUserAccount : Bool = false
     
     // MARK: - construction / init routines
     static var _currentUserAccount : UserAccount?
@@ -30,11 +44,14 @@ class UserAccount {
                 _currentUserAccount?.user = nil
             }
             _currentUserAccount = userAccount
+            _currentUserAccount?.isCurrentUserAccount = true
         }
         
         get {
             if _currentUserAccount == nil {
                 _currentUserAccount = UserAccount()
+                _currentUserAccount?.isCurrentUserAccount = true
+                _currentUserAccount?.user = User.currentUser
             }
             return _currentUserAccount
         }
@@ -58,6 +75,9 @@ class UserAccount {
             
             self.homeTimeLineService.currentUser(success: { (user) in
                 self.user = user
+                if self.isCurrentUserAccount == true {
+                    User.currentUser = user
+                }
                 self.successCompletionHandler?()
                 }, error: { (receivedError) in
                     self.errorCompletionHandler?(receivedError)

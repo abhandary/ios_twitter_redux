@@ -12,7 +12,6 @@ class AccountsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var userAccounts : [User]!
     
     var currentAccountIndex : Int!
     
@@ -21,11 +20,13 @@ class AccountsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         // get the index corresponding to the current user
-        for ix in 0..<userAccounts.count {
+        for ix in 0..<UserAccount.allAccounts.count {
             
             if let currentUser = UserAccount.currentUserAccount.user,
-                userAccounts[ix].userID! == currentUser.userID! {
+                let user = UserAccount.allAccounts[ix].user,
+                user.userID! == currentUser.userID! {
                 
                 currentAccountIndex = ix
             }
@@ -46,12 +47,12 @@ class AccountsViewController: UIViewController {
 extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userAccounts.count
+        return UserAccount.allAccounts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kAccountsCell) as! AccountsCell
-        cell.user = userAccounts[indexPath.row]
+        cell.user = UserAccount.allAccounts[indexPath.row].user
         return cell
     }
     
