@@ -1839,6 +1839,136 @@
             </objects>
             <point key="canvasLocation" x="2213.5999999999999" y="1649.3253373313344"/>
         </scene>
+        <!--Accounts View Controller-->
+        <scene sceneID="jiY-JH-4DQ">
+            <objects>
+                <viewController id="ljh-nF-9fN" customClass="AccountsViewController" customModule="TwitterClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dh9-Pu-6qX"/>
+                        <viewControllerLayoutGuide type="bottom" id="i1U-rc-1bS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c10-Uh-Xw4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjg-OV-Bug">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="2Bd-Ft-cby"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Accounts" id="LZ8-Ot-8bq">
+                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="tmE-Cj-ep7"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nUX-yj-xeM">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AccountsCell" id="bgT-7N-Hcz" customClass="AccountsCell" customModule="TwitterClient" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bgT-7N-Hcz" id="vO1-9n-tuE">
+                                            <frame key="frameInset" width="375" height="54"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mtc-5x-q6w" userLabel="Delete View">
+                                                    <color key="backgroundColor" red="0.76470588240000004" green="0.058823529409999999" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lmy-uf-NRc">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFV-l6-43X" userLabel="Cell FG View">
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5kg-qF-vAm">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="25" id="Fs1-uS-Q7l"/>
+                                                                <constraint firstAttribute="width" constant="25" id="OG6-7v-3o8"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Akshay Bhandary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wN-XP-33u">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@BhandaryAkshay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chh-dw-tqt">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="2wN-XP-33u" firstAttribute="leading" secondItem="5kg-qF-vAm" secondAttribute="trailing" constant="15" id="AnD-Xe-KeK"/>
+                                                        <constraint firstItem="5kg-qF-vAm" firstAttribute="centerY" secondItem="lFV-l6-43X" secondAttribute="centerY" id="C2X-59-OqA"/>
+                                                        <constraint firstItem="Chh-dw-tqt" firstAttribute="bottom" secondItem="5kg-qF-vAm" secondAttribute="bottom" id="Pxt-Ws-xdw"/>
+                                                        <constraint firstItem="2wN-XP-33u" firstAttribute="top" secondItem="5kg-qF-vAm" secondAttribute="top" id="elo-5l-npp"/>
+                                                        <constraint firstItem="5kg-qF-vAm" firstAttribute="leading" secondItem="lFV-l6-43X" secondAttribute="leading" constant="20" id="kcR-Z2-njQ"/>
+                                                        <constraint firstItem="Chh-dw-tqt" firstAttribute="leading" secondItem="5kg-qF-vAm" secondAttribute="trailing" constant="15" id="y3v-zG-Mky"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="lFV-l6-43X" firstAttribute="top" secondItem="vO1-9n-tuE" secondAttribute="top" id="8ss-5l-Ykq"/>
+                                                <constraint firstItem="mtc-5x-q6w" firstAttribute="leading" secondItem="vO1-9n-tuE" secondAttribute="leading" id="Eau-an-RiM"/>
+                                                <constraint firstItem="Lmy-uf-NRc" firstAttribute="centerY" secondItem="vO1-9n-tuE" secondAttribute="centerY" id="PsD-pA-aJH"/>
+                                                <constraint firstAttribute="bottom" secondItem="lFV-l6-43X" secondAttribute="bottom" id="Tgw-7V-eFq"/>
+                                                <constraint firstItem="Lmy-uf-NRc" firstAttribute="leading" secondItem="vO1-9n-tuE" secondAttribute="leadingMargin" constant="15" id="Uen-An-7gY"/>
+                                                <constraint firstItem="lFV-l6-43X" firstAttribute="width" secondItem="vO1-9n-tuE" secondAttribute="width" id="kpJ-p1-nTV"/>
+                                                <constraint firstAttribute="trailing" secondItem="mtc-5x-q6w" secondAttribute="trailing" id="t2D-aC-aH9"/>
+                                                <constraint firstItem="lFV-l6-43X" firstAttribute="leading" secondItem="vO1-9n-tuE" secondAttribute="leading" id="tz6-5A-YxX"/>
+                                                <constraint firstItem="mtc-5x-q6w" firstAttribute="top" secondItem="vO1-9n-tuE" secondAttribute="top" id="ucR-Yt-H0S"/>
+                                                <constraint firstAttribute="bottom" secondItem="mtc-5x-q6w" secondAttribute="bottom" id="wHH-aK-Xa9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="thumbNailImage" destination="5kg-qF-vAm" id="Q3z-JI-6ZM"/>
+                                            <outlet property="userName" destination="2wN-XP-33u" id="zNQ-1G-WJA"/>
+                                            <outlet property="userScreenName" destination="Chh-dw-tqt" id="f2j-iP-50C"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Ztu-Id-G0N">
+                                        <rect key="frame" x="0.0" y="83" width="375" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ztu-Id-G0N" id="qTD-eg-Bay">
+                                            <frame key="frameInset" width="375" height="54"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add an existing account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXw-tx-pPv">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="fXw-tx-pPv" firstAttribute="centerY" secondItem="qTD-eg-Bay" secondAttribute="centerY" id="3Uy-l6-ndY"/>
+                                                <constraint firstItem="fXw-tx-pPv" firstAttribute="centerX" secondItem="qTD-eg-Bay" secondAttribute="centerX" id="G1H-QK-IKh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="i1U-rc-1bS" firstAttribute="top" secondItem="nUX-yj-xeM" secondAttribute="bottom" id="315-Gm-csk"/>
+                            <constraint firstAttribute="trailing" secondItem="Gjg-OV-Bug" secondAttribute="trailing" id="FL2-tO-Uqh"/>
+                            <constraint firstItem="Gjg-OV-Bug" firstAttribute="top" secondItem="c10-Uh-Xw4" secondAttribute="top" id="X22-Pg-SB0"/>
+                            <constraint firstItem="nUX-yj-xeM" firstAttribute="top" secondItem="Gjg-OV-Bug" secondAttribute="bottom" id="XjS-Gl-Uul"/>
+                            <constraint firstAttribute="trailing" secondItem="nUX-yj-xeM" secondAttribute="trailing" id="dxC-Wr-U08"/>
+                            <constraint firstItem="nUX-yj-xeM" firstAttribute="leading" secondItem="c10-Uh-Xw4" secondAttribute="leading" id="qfs-bz-6Po"/>
+                            <constraint firstItem="Gjg-OV-Bug" firstAttribute="leading" secondItem="c10-Uh-Xw4" secondAttribute="leading" id="xoP-yK-ued"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="nUX-yj-xeM" id="O3r-vf-Mwr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1zE-MR-QIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3360.8000000000002" y="2542.5787106446778"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="prJ-8Z-iaP">
             <objects>

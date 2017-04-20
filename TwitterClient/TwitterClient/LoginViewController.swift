@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
     @IBAction func signInButtonPressed(_ sender: UIButton) {
         
 
-        UserAccount.currentUserAccount?.loginUser(success: { () in
+        UserAccount.currentUserAccount.loginUser(success: { () in
             
                 if let svc = self.svc {
                     svc.dismiss(animated: true, completion: {

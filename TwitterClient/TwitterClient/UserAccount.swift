@@ -19,12 +19,15 @@ class UserAccount {
     var errorCompletionHandler : ((Error) -> Void)?
     
     
+    var user : User?
+    
     // MARK: - construction / init routines
     static var _currentUserAccount : UserAccount?
-    static var currentUserAccount : UserAccount? {
+    static var currentUserAccount : UserAccount! {
         set (userAccount) {
             if userAccount == nil {
                 _currentUserAccount?.loginService.logoutUser()
+                _currentUserAccount?.user = nil
             }
             _currentUserAccount = userAccount
         }
@@ -46,7 +49,7 @@ class UserAccount {
         successCompletionHandler = success
         errorCompletionHandler = error
         
-        if User.currentUser != nil {
+        if let _ = self.user {
             self.successCompletionHandler?()
             return
         }
@@ -54,7 +57,7 @@ class UserAccount {
         loginService.loginUser(success: { () in
             
             self.homeTimeLineService.currentUser(success: { (user) in
-                User.currentUser = user
+                self.user = user
                 self.successCompletionHandler?()
                 }, error: { (receivedError) in
                     self.errorCompletionHandler?(receivedError)
@@ -69,7 +72,7 @@ class UserAccount {
     
     func logOutUser() {
         loginService.logoutUser()
-        User.currentUser = nil
+        self.user = nil
     }
     
     func receivedOauthToken(url: URL, success: @escaping ((Void)->Void), error:@escaping ((Error)->Void)) {

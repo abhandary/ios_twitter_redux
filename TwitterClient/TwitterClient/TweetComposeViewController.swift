@@ -49,7 +49,7 @@ class TweetComposeViewController: UIViewController {
             replyingToLabel.isHidden = true
             tweetEntryVerticalDistanceToThumbnailImageConstraint.constant = 20
         }
-        if let user = User.currentUser {
+        if let user = UserAccount.currentUserAccount.user {
             if let profileURL = user.profileURL {
                 thumbNailImageLabel.setImageWith(profileURL)
                 thumbNailImageLabel.clipsToBounds = true
@@ -82,9 +82,9 @@ class TweetComposeViewController: UIViewController {
 
             if let inReplyToID = inReplyToID {
                 tweetText = "@\(inReplyToScreenName!) \(tweetText)"
-                UserAccount.currentUserAccount?.post(statusUpdate: tweetText, inReplyTo: inReplyToID, success: successBlock, error: errorBlock)
+                UserAccount.currentUserAccount.post(statusUpdate: tweetText, inReplyTo: inReplyToID, success: successBlock, error: errorBlock)
             } else {
-                UserAccount.currentUserAccount?.post(statusUpdate: tweetText, success: successBlock, error: errorBlock)
+                UserAccount.currentUserAccount.post(statusUpdate: tweetText, success: successBlock, error: errorBlock)
             }
         }
     }

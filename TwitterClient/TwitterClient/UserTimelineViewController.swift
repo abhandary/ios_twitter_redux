@@ -33,7 +33,7 @@ class UserTimelineViewController: TimeLineViewController {
     override func viewDidLoad() {
         
         // default to the current user is a user wasn't passed in
-        user = user ?? User.currentUser
+        user = user ?? UserAccount.currentUserAccount.user
 
         
         self.tableView.delegate = self
@@ -68,7 +68,7 @@ class UserTimelineViewController: TimeLineViewController {
         
         if let user = user {
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
-            UserAccount.currentUserAccount?.fetchTweets(user : user, success: { (tweets) in
+            UserAccount.currentUserAccount.fetchTweets(user : user, success: { (tweets) in
                 hud.hide(animated: true);
                 self.tweets = tweets
                 self.refreshControl.endRefreshing()
@@ -134,7 +134,7 @@ class UserTimelineViewController: TimeLineViewController {
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
                 isMoreDataLoading = true
                 let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
-                UserAccount.currentUserAccount?.fetchTweetsOlderThanLastFetch(user : user!,
+                UserAccount.currentUserAccount.fetchTweetsOlderThanLastFetch(user : user!,
                                                                               success: { (tweets) in
                     hud.hide(animated: true);
                     self.isMoreDataLoading = false
