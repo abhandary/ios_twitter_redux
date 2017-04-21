@@ -87,6 +87,7 @@ class UserAccount : NSObject {
     
     func logOutUser() {
         loginService.logoutUser()
+        
         self.user = nil
     }
     

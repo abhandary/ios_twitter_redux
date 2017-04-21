@@ -46,6 +46,15 @@ class UserAccountManagement {
     func remove(userAccount : UserAccount) {
         self.queue.async {
             if self._allAccounts != nil {
+                let count = self._allAccounts?.count ?? 0
+                if userAccount.isCurrentUserAccount == true && count > 1 {
+                    // need to pick a new user account
+                    for account in self.allAccounts {
+                        if account.isCurrentUserAccount == false {
+                            account.isCurrentUserAccount = true
+                        }
+                    }
+                }
                 self._allAccounts!.remove(object: userAccount)
                 self.saveAllAccountsToDisk()
             }

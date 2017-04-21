@@ -57,7 +57,6 @@ class AccountsViewController: UIViewController {
                 currentAccountIndex = ix
             }
         }
-
     }
     
 }
@@ -144,6 +143,30 @@ extension AccountsViewController : AccountsCellDelegate {
     
     func delete(sender : AccountsCell) {
         
+        if allAccounts.count == 1 {
+            // last user, log out after confirmation
+            confirmLogout(sender)
+        } else {
+            // remove user, pick another one if this is the current user
+            UserAccountManagement.sharedInstance.remove(userAccount: sender.userAccount)
+            updateAllAccounts()
+        }
+    }
+    
+    func confirmLogout(_ sender : AccountsCell) {
+        let alertVC = UIAlertController(title: "Logout Current User?", message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            let userAccount = UserAccountManagement.sharedInstance.currentUserAccount
+            userAccount?.logOutUser()
+            UserAccountManagement.sharedInstance.currentUserAccount = nil
+            NotificationCenter.default.post(name: Notification.Name(rawValue: TimeLineViewController.kNotificationUserLoggedOut), object: self)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
+            sender.cancelDelete()
+        }
+        alertVC.addAction(okAction)
+        alertVC.addAction(cancelAction)
+        present(alertVC, animated: true)
     }
     
     func selected(sender: AccountsCell) {
