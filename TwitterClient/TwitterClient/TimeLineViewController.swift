@@ -86,6 +86,13 @@ class TimeLineViewController: UIViewController  {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func hamburgerIconTapped(_ sender: UIBarButtonItem) {
+        if let hamburgerVC = self.view.window?.rootViewController as? HamburgerViewController {
+            hamburgerVC.toggleLeft()
+        }
+    }
+    
+    
     @IBAction func logOutButtonPressed(_ sender: AnyObject) {
         
         UserAccountManagement.sharedInstance.currentUserAccount = nil

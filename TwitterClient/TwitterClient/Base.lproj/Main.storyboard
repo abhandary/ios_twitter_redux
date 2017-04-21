@@ -692,12 +692,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XEO-D1-zF0">
-                        <barButtonItem key="leftBarButtonItem" image="logout" id="x6g-go-MNX">
+                        <barButtonItem key="leftBarButtonItem" image="hamburger_icon" id="x6g-go-MNX">
+                            <color key="tintColor" red="0.1647058824" green="0.63529411759999999" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="logOutButtonPressed:" destination="jGq-2K-V01" id="SHZ-IC-Z0l"/>
+                                <action selector="hamburgerIconTapped:" destination="jGq-2K-V01" id="o1g-3P-33n"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="compose" id="3Hg-M3-UVW">
+                            <color key="tintColor" red="0.1647058824" green="0.63529411759999999" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="NC6-Ny-UKg" kind="show" identifier="tweetComposeSegue" action="showDetailViewController:sender:" id="2Mg-pS-hro"/>
                             </connections>
@@ -1162,6 +1164,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FGc-kp-Ikh">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="A1C-lw-fYc"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem id="llf-FA-5bs"/>
+                                </items>
+                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A3z-dt-OTO">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1179,9 +1189,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="A3z-dt-OTO" firstAttribute="leading" secondItem="1wS-Wj-FeM" secondAttribute="leading" id="1ZX-vT-erR"/>
-                            <constraint firstItem="A3z-dt-OTO" firstAttribute="top" secondItem="1wS-Wj-FeM" secondAttribute="top" id="SBA-c4-gbb"/>
                             <constraint firstItem="KJd-Ib-93R" firstAttribute="top" secondItem="A3z-dt-OTO" secondAttribute="bottom" id="bzY-vi-4Bc"/>
+                            <constraint firstItem="FGc-kp-Ikh" firstAttribute="top" secondItem="1wS-Wj-FeM" secondAttribute="top" id="cN5-tW-qtX"/>
+                            <constraint firstItem="FGc-kp-Ikh" firstAttribute="leading" secondItem="1wS-Wj-FeM" secondAttribute="leading" id="d8r-N8-emX"/>
                             <constraint firstAttribute="trailing" secondItem="A3z-dt-OTO" secondAttribute="trailing" id="jrT-OT-p0c"/>
+                            <constraint firstAttribute="trailing" secondItem="FGc-kp-Ikh" secondAttribute="trailing" id="lL6-PS-cx8"/>
+                            <constraint firstItem="A3z-dt-OTO" firstAttribute="top" secondItem="FGc-kp-Ikh" secondAttribute="bottom" id="mOr-hu-yxf"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1190,7 +1203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cIr-eW-fGu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="310" y="2442"/>
+            <point key="canvasLocation" x="310" y="2455"/>
         </scene>
         <!--UserTimeLineViewController-->
         <scene sceneID="vfO-26-dkK">
@@ -2142,7 +2155,7 @@
         <image name="compose" width="22" height="22"/>
         <image name="error_icon" width="30" height="30"/>
         <image name="favorite_icon" width="10" height="10"/>
-        <image name="logout" width="19" height="19"/>
+        <image name="hamburger_icon" width="30" height="30"/>
         <image name="notretweeted" width="15" height="10"/>
         <image name="reply_icon" width="16" height="14"/>
         <image name="retweet_icon" width="10" height="10"/>

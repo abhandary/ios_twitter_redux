@@ -8,8 +8,15 @@
 
 import UIKit
 
+enum HamburgerMenuState {
+    case leftRevealed
+    case leftCollapsed
+}
+
 class HamburgerViewController: UIViewController {
 
+    
+    var state : HamburgerMenuState = .leftCollapsed
     
     @IBOutlet weak var menuView: UIView!
     @IBOutlet weak var contentView: UIView!
@@ -39,27 +46,50 @@ class HamburgerViewController: UIViewController {
         let translation = sender.translation(in: view)
         let velocity = sender.velocity(in: view)
         
-        if sender.state == UIGestureRecognizerState.began {
+        if sender.state == .began {
             originalLeftMargin = contentViewLeadingConstraint.constant
-        } else if sender.state == UIGestureRecognizerState.changed {
-            if translation.x >= 0 {
-                contentViewLeadingConstraint.constant = originalLeftMargin + translation.x
-            } else {
-                contentViewLeadingConstraint.constant = 0
-            }
+        } else if sender.state == .changed {
+            contentViewLeadingConstraint.constant = originalLeftMargin + translation.x
+            contentViewLeadingConstraint.constant
+                    = contentViewLeadingConstraint.constant < 0 ? 0 : contentViewLeadingConstraint.constant
         } else {
-            if velocity.x > 0 { 
-                UIView.animate(withDuration: 2, animations: {
-                    self.contentViewLeadingConstraint.constant = self.view.frame.size.width - self.kRevealViewEndYOffset
-                })
+            if velocity.x > 0 {
+                revealLeft()
             } else {
-                UIView.animate(withDuration: 2, animations: {
-                    self.contentViewLeadingConstraint.constant = 0
-                })
-
+                hideLeft()
             }
         }
     }
+    
+    
+    func toggleLeft() {
+        if state == .leftCollapsed {
+            revealLeft()
+        } else {
+            hideLeft()
+        }
+    }
+    
+    func revealLeft() {
+        DispatchQueue.main.async {
+            self.contentViewLeadingConstraint.constant = self.view.frame.size.width - self.kRevealViewEndYOffset
+            UIView.animate(withDuration: 0.4, animations: {
+                self.view.layoutIfNeeded()
+            })
+            self.state = .leftRevealed
+        }
+    }
+    
+    func hideLeft() {
+        DispatchQueue.main.async {
+            self.contentViewLeadingConstraint.constant = 0
+            UIView.animate(withDuration: 0.4, animations: {
+                self.view.layoutIfNeeded()
+            })
+            self.state = .leftCollapsed
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

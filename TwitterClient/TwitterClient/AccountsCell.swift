@@ -69,13 +69,23 @@ class AccountsCell: UITableViewCell {
                 self.delegate?.delete(sender: self)
                 cellFGViewLeadingSpaceConstraint.constant = self.contentView.frame.width
             } else {
-                // snap it back into place
-                cellFGViewLeadingSpaceConstraint.constant = 0
-                UIView.animate(withDuration: 1, animations: { 
-                    self.contentView.setNeedsLayout()
-                })
+                if point.x < 0 {
+                    cellFGViewLeadingSpaceConstraint.constant = 0
+                } else {
+                    // snap it back into place
+                    DispatchQueue.main.async {
+                        self.moveContentCellback()
+                    }
+                }
             }
         }
+    }
+    
+    func moveContentCellback() {
+        self.cellFGViewLeadingSpaceConstraint.constant = 0
+        UIView.animate(withDuration: 0.4, animations: {
+            self.contentView.layoutIfNeeded()
+        })
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
