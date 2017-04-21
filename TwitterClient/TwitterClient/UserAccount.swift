@@ -30,11 +30,27 @@ class UserAccount : NSObject {
         self.user = user
     }
     
-    var user : User?
-    var isCurrentUserAccount : Bool = false
+    var accessToken : Data? {
+        didSet {
+            if let accessToken = accessToken,
+                isCurrentUserAccount == true {
+                loginService.saveAccessToken(accessToken: accessToken)
+            }
+        }
+    }
     
+    var user : User?
+    var isCurrentUserAccount : Bool = false {
+        didSet {
+            if let accessToken = accessToken,
+                isCurrentUserAccount == true {
+                loginService.saveAccessToken(accessToken: accessToken)
+            }
+        }
+    }
 
     // MARK: - public routines
+    
     
     func loginUser(success:@escaping((Void) -> Void),
                    error: @escaping((Error) -> Void),
@@ -48,9 +64,10 @@ class UserAccount : NSObject {
             return
         }
         
-        loginService.loginUser(success: { () in
+        loginService.loginUser(success: { (accessToken) in
             
             self.apiService.currentUser(success: { (user) in
+                self.accessToken = accessToken
                 self.user = user
                 if self.isCurrentUserAccount == true {
                     User.currentUser = user

@@ -46,12 +46,12 @@ class TimeLineViewController: UIViewController  {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         self.networkErrorView.isHidden = true
-        reloadTable()
+        
         
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        print("view will appear")
+        reloadTable()
     }
 
     func reloadTable() {

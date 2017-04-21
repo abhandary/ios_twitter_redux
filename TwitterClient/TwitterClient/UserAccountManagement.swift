@@ -15,6 +15,7 @@ class UserAccountManagement {
     
     static let sharedInstance = UserAccountManagement()
     
+    let keychain = KeychainSwift()
     let queue  = DispatchQueue(label: "UserAccountManagement")
     
     var _allAccounts : [UserAccount]?
@@ -57,15 +58,19 @@ class UserAccountManagement {
             for account in self._allAccounts! {
                 if let user = account.user,
                     let userID = user.userID,
+                    let accessToken = account.accessToken,
                     let userDict = user.dictionary {
+                    
                     let userID = String(userID)
                     accountsDict[userID] = userDict
+                    self.keychain.set(accessToken, forKey: userID)
                 }
             }
             
             let json = try! JSONSerialization.data(withJSONObject: accountsDict, options: JSONSerialization.WritingOptions.prettyPrinted)
 
             defaults.set(json, forKey: self.kAccountsDictionary);
+            defaults.synchronize()
         }
     }
     
@@ -79,8 +84,14 @@ class UserAccountManagement {
 
 
             for account in accountsDict {
+                let userAccount = UserAccount(User(dictionary: account.value as! NSDictionary))
 
-                _allAccounts?.append(UserAccount(User(dictionary: account.value as! NSDictionary)))
+                if let user = userAccount.user,
+                    let userID = user.userID {
+                    userAccount.accessToken = keychain.getData(String(userID))
+                    // only add the account if there is an access token associated with the account
+                    _allAccounts?.append(userAccount)
+                }
             }
 
         }

@@ -22,11 +22,10 @@ let kAccessTokenPath = "oauth/access_token"
 let kAccessTokenMethod = "POST"
 
 
-
 class TwitterLoginService {
     
     var errorCompletionHandler : ((Error) -> Void)?
-    var successCompletionHandler: ((Void) -> Void)?
+    var successCompletionHandler: ((Data) -> Void)?
     var receivedRequestTokenHandler: ((URL) -> Void)?
     
     var oauthClient : OAuthClient!
@@ -36,7 +35,7 @@ class TwitterLoginService {
     }
     
     // MARK: - public routines
-    func loginUser(success:@escaping((Void) -> Void),
+    func loginUser(success:@escaping((Data) -> Void),
                    error: @escaping((Error) -> Void),
                    receivedRequestToken: @escaping((URL) -> Void)) {
         
@@ -67,8 +66,8 @@ class TwitterLoginService {
     
     
     func receivedOauthToken(url: URL,
-                            success: @escaping ((Void)->Void),
-                            error:@escaping ((Error)->Void)) {
+                            success: @escaping ((Void)->()),
+                            error:@escaping ((Error)->())) {
         
         if let urlQuery = url.query {
             
@@ -77,8 +76,13 @@ class TwitterLoginService {
                                                         requestToken: BDBOAuth1Credential(queryString: urlQuery),
                                                         success: { (accessToken) in
                                                             self.oauthClient.requestSerializer.saveAccessToken(accessToken)
-                                                            self.successCompletionHandler?()
-                                                            success()
+                                                            if let accessToken = accessToken {
+                                                                let data = NSKeyedArchiver.archivedData(withRootObject: accessToken)
+                                                                self.successCompletionHandler?(data)
+                                                                success()
+                                                            } else {
+                                                                error(NSError(domain: "got a nil access token object", code: 0, userInfo: nil))
+                                                            }
                                                             
                 }, failure: { (receivedError )  in
                     // print(receivedError)
@@ -91,6 +95,12 @@ class TwitterLoginService {
     
     func logoutUser() {
         oauthClient.deauthorize()
+    }
+    
+    func saveAccessToken(accessToken : Data) {
+        if let accessTokenObj = NSKeyedUnarchiver.unarchiveObject(with: accessToken) as? BDBOAuth1Credential {
+            self.oauthClient.requestSerializer.saveAccessToken(accessTokenObj)
+        }
     }
     
     internal func received(requestToken : String) {
