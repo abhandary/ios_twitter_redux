@@ -9,7 +9,7 @@
 import Foundation
 
 
-class UserAccount {
+class UserAccount : NSObject {
     
     var loginService : UserLoginService!
     var homeTimeLineService : UserTimeLineService!
@@ -18,7 +18,8 @@ class UserAccount {
     var successCompletionHandler : ((Void) -> Void)?
     var errorCompletionHandler : ((Error) -> Void)?
     
-    init() {
+    override init() {
+        super.init()
         
         let oauthClient = OAuthClient.oauthAuthClient()
         loginService = UserLoginService(oauthClient: oauthClient)

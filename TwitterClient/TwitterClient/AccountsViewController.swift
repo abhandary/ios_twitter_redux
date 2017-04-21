@@ -8,10 +8,18 @@
 
 import UIKit
 
+
+@objc protocol AccountsViewControllerDelegate {
+    func accountsUpdated(sender : AccountsViewController)
+    func accountSwitched(sender : AccountsViewController, userAccount : UserAccount)
+}
+
 class AccountsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
+
+    weak var delegate : AccountsViewControllerDelegate?
     
     // controller to login user into an existing account
     var addAccountViewController  : AddAccountViewController?
@@ -25,6 +33,18 @@ class AccountsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateAllAccounts()
+        tableView.delegate = self
+        tableView.dataSource = self
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func updateAllAccounts() {
         allAccounts = UserAccountManagement.sharedInstance.allAccounts
         
         // get the index corresponding to the current user
@@ -37,15 +57,7 @@ class AccountsViewController: UIViewController {
                 currentAccountIndex = ix
             }
         }
-        
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        // Do any additional setup after loading the view.
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 }
@@ -60,7 +72,8 @@ extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row < allAccounts.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: kAccountsCell) as! AccountsCell
-            cell.user = allAccounts[indexPath.row].user
+            cell.userAccount = allAccounts[indexPath.row]
+            cell.delegate = self
             if indexPath.row == currentAccountIndex {
                 cell.accessoryType = .checkmark
             }  else {
@@ -78,6 +91,8 @@ extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
             addNewAccount()
         } else {
             UserAccountManagement.sharedInstance.currentUserAccount = allAccounts[indexPath.row]
+            currentAccountIndex = indexPath.row
+            self.delegate?.accountSwitched(sender: self, userAccount: allAccounts[indexPath.row])
             self.tableView.reloadData()
         }
     }
@@ -94,9 +109,16 @@ extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
             
             // all is good here, able to add the new account
             self.addAccountViewController?.dismiss(animated: true, completion:nil)
-            self.tableView.reloadData()
+            
             // commit this new user account to the 'all accounts' list
             UserAccountManagement.sharedInstance.addAccount(userAccount)
+            
+            // reload the local copy of the list and reload the table view and
+            // notify delegate so it can change the offset of the accounts view if required
+            self.updateAllAccounts()
+            self.tableView.reloadData()
+            self.delegate?.accountsUpdated(sender: self)
+            self.delegate?.accountSwitched(sender: self, userAccount: userAccount)
             }, error: { (error) in
                 
                 // failed to log in the user
@@ -116,6 +138,18 @@ extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
         self.addAccountViewController?.url = url
         self.present(self.addAccountViewController!, animated: true, completion: nil);
     }
+}
+
+extension AccountsViewController : AccountsCellDelegate {
     
+    func delete(sender : AccountsCell) {
+        
+    }
+    
+    func selected(sender: AccountsCell) {
+        
+        // updateAllAccounts()
+        // self.delegate?.accountSwitched(sender: self, userAccount: sender.userAccount)
+    }
 
 }

@@ -11,6 +11,7 @@ import UIKit
 
 @objc protocol AccountsCellDelegate {
     func delete(sender : AccountsCell)
+    func selected(sender: AccountsCell)
 }
 
 class AccountsCell: UITableViewCell {
@@ -25,11 +26,13 @@ class AccountsCell: UITableViewCell {
     
     var gestureStaringPoint : CGPoint!
     
-    var user : User! {
+    var userAccount : UserAccount! {
         didSet {
-            thumbNailImage.setImageWith(user.profileURL!)
-            userName.text = user.name
-            userScreenName.text = user.screename
+            if let user = userAccount.user {
+                thumbNailImage.setImageWith(user.profileURL!)
+                userName.text = user.name
+                userScreenName.text = user.screename
+            }
         }
     }
     
@@ -66,7 +69,7 @@ class AccountsCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        self.delegate?.selected(sender: self)
         // Configure the view for the selected state
     }
 

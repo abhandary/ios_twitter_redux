@@ -67,8 +67,6 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         longPressGR.delegate = self
         self.tabBarController!.tabBar.addGestureRecognizer(longPressGR)
         
-        // default to the current user is a user wasn't passed in
-        user = user ?? UserAccountManagement.sharedInstance.currentUserAccount.user
 
         let panGR = UIPanGestureRecognizer(target: self, action: #selector(headeriewPanGesture(_:)));
         headerView.addGestureRecognizer(panGR)
@@ -79,6 +77,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         
         // setup accounts view
         accountsVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: AppDelegate.kAccountsViewController) as? AccountsViewController
+        accountsVC?.delegate = self
         accountsVCView = accountsVC?.view
         self.tabBarController?.view.addSubview(accountsVCView!)
         accountsVCView?.frame = (accountsVCView?.frame.offsetBy(dx: 0, dy: self.view.frame.size.height))!
@@ -93,6 +92,19 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         whiteViewAroundProfileImageView.layer.cornerRadius = 5
         whiteViewAroundProfileImageView.clipsToBounds = true
         
+        updateProfileHeader()
+        
+        // defer super till this view has been setup
+        super.viewDidLoad()
+        
+
+        // Do any additional setup after loading the view.
+    }
+    
+    func updateProfileHeader() {
+        
+        // default to the current user is a user wasn't passed in
+        user = user ?? UserAccountManagement.sharedInstance.currentUserAccount.user
         if let  user = user {
             if let profileURL = user.profileURL {
                 profileImageView.setImageWith(profileURL)
@@ -103,12 +115,6 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
             numberFollowersLabel.text = "\(user.followersCount ?? 0)"
             numberFollowingLabel.text = "\(user.followingCount ?? 0)"
         }
-
-        // defer super till this view has been setup
-        super.viewDidLoad()
-        
-
-        // Do any additional setup after loading the view.
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -286,6 +292,29 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         }
     }
 
+}
+
+extension UserTimelineViewController : AccountsViewControllerDelegate {
+    func accountsUpdated(sender : AccountsViewController) {
+        
+        // reset account vc view frame
+        accountsVCView?.frame = self.view.frame.offsetBy(dx: 0, dy: self.view.frame.height)
+        UIView.animate(withDuration: 0.4) {
+            
+            self.view.layoutIfNeeded()
+            
+            // update as per the number of accounts
+            let yOffset : CGFloat = (44.0 * 2.0).adding(CGFloat(55 * UserAccountManagement.sharedInstance.allAccounts.count)).adding(20)
+            self.accountsVCView?.frame = (self.accountsVCView!.frame.offsetBy(dx: 0, dy: -yOffset))
+        }
+    }
+    
+    func accountSwitched(sender : AccountsViewController, userAccount : UserAccount) {
+        user = userAccount.user
+        reloadTable()
+        updateProfileHeader()
+        maskViewTapped()
+    }
 }
 
 
