@@ -42,6 +42,15 @@ class UserAccountManagement {
             self.saveAllAccountsToDisk()
         }
     }
+    
+    func remove(userAccount : UserAccount) {
+        self.queue.async {
+            if self._allAccounts != nil {
+                self._allAccounts!.remove(object: userAccount)
+                self.saveAllAccountsToDisk()
+            }
+        }
+    }
  
     
     func saveAllAccountsToDisk() {
@@ -140,8 +149,11 @@ class UserAccountManagement {
     
     func set(currentUserAccount : UserAccount?) {
         if currentUserAccount == nil {
-            _currentUserAccount?.loginService.logoutUser()
-            _currentUserAccount?.user = nil
+            if let _currentUserAccount = _currentUserAccount {
+                _currentUserAccount.loginService.logoutUser()
+                _currentUserAccount.user = nil
+                remove(userAccount: _currentUserAccount)
+            }
             User.currentUser = nil
         } else {
             User.currentUser = currentUserAccount?.user

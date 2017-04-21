@@ -1936,8 +1936,12 @@
                                     <constraint firstAttribute="height" constant="44" id="I73-Q4-wVb"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Account Login" id="avy-wM-vlD">
-                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="KyP-nX-kGz"/>
+                                    <navigationItem id="avy-wM-vlD">
+                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="KyP-nX-kGz">
+                                            <connections>
+                                                <action selector="doneButtonPressed:" destination="ghn-VF-VNV" id="iPi-mp-XTX"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>

@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
     let kShowUserTimeLineSegue = "showUserTimeLineSegue"
     let kTwitterSignUpURL = "https://mobile.twitter.com/signup"
     
-    var svc : SFSafariViewController?
+    var addAccountVC : AddAccountViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +34,8 @@ class LoginViewController: UIViewController {
 
 
     @IBAction func signUpButtonPressed(_ sender: UIButton) {
-        svc = SFSafariViewController(url: URL(string: kTwitterSignUpURL)!)
-        self.present(svc!, animated: true, completion: nil)
+        
+        presentAddAccountVC(url: URL(string: kTwitterSignUpURL))
     }
     
     @IBAction func signInButtonPressed(_ sender: UIButton) {
@@ -43,8 +43,9 @@ class LoginViewController: UIViewController {
 
         UserAccountManagement.sharedInstance.currentUserAccount.loginUser(success: { () in
             
-                if let svc = self.svc {
-                    svc.dismiss(animated: true, completion: {
+                if let addAccountVC = self.addAccountVC {
+
+                    addAccountVC.dismiss(animated: true, completion: {
                         // self.performSegue(withIdentifier: self.kShowUserTimeLineSegue, sender: self);
                         NotificationCenter.default.post(name: Notification.Name(rawValue: LoginViewController.kNotificationUserLoggedIn), object: self)
                     })
@@ -53,15 +54,20 @@ class LoginViewController: UIViewController {
                     NotificationCenter.default.post(name: Notification.Name(rawValue: LoginViewController.kNotificationUserLoggedIn), object: self)
                 }
             }, error: { (error) in
-                self.svc?.dismiss(animated: true, completion: nil)
+                self.addAccountVC?.dismiss(animated: true, completion: nil)
             }) { (requestTokenURL) in
                 self.receivedRequestToken(url: requestTokenURL)
         }
     }
     
-    func receivedRequestToken(url: URL) {
-        self.svc = SFSafariViewController(url: url)
-        self.present(self.svc!, animated: true, completion: nil);
+    func receivedRequestToken(url: URL?) {
+        presentAddAccountVC(url: url)
+    }
+    
+    func presentAddAccountVC(url : URL?) {
+        addAccountVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: AppDelegate.kAddAccountViewController)  as? AddAccountViewController
+        addAccountVC?.url = url
+        self.present(addAccountVC!, animated: true, completion: nil);
     }
     
     @IBAction func prepareForUnwind(segue : UIStoryboardSegue) {

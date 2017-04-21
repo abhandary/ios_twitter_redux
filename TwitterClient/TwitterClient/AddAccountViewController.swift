@@ -20,9 +20,12 @@ class AddAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       // URLCache.shared.removeAllCachedResponses()
-       // URLCache.shared.diskCapacity = 0
-       // URLCache.shared.memoryCapacity = 0
+        
+        // URLCache.shared.removeAllCachedResponses()
+        // URLCache.shared.diskCapacity = 0
+        // URLCache.shared.memoryCapacity = 0
+        
+        deleteAllCookies()
         
         if let url = url {
             webView.delegate = self
@@ -31,6 +34,16 @@ class AddAccountViewController: UIViewController {
         }
         
         // Do any additional setup after loading the view.
+    }
+    
+    func deleteAllCookies() {
+        let storage = HTTPCookieStorage.shared
+        if  let cookies = storage.cookies {
+            for cookie in cookies {
+                storage.deleteCookie(cookie)
+            }
+        }
+        UserDefaults.standard.synchronize()
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +61,9 @@ class AddAccountViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
 
 }
 

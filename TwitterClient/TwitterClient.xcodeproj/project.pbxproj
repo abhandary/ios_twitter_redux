@@ -40,6 +40,7 @@
 		E2EF6DF81EA879B300A8BFDB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EF6DF71EA879B300A8BFDB /* TabBarViewController.swift */; };
 		E2EF6DFA1EA89CB300A8BFDB /* AddAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EF6DF91EA89CB300A8BFDB /* AddAccountViewController.swift */; };
 		E2F1C97D1EAA8DA90034E0A7 /* KeyChainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1C97C1EAA8DA90034E0A7 /* KeyChainSwift.swift */; };
+		E2F1C97F1EAAA6B30034E0A7 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1C97E1EAAA6B30034E0A7 /* Array+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		E2EF6DF71EA879B300A8BFDB /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E2EF6DF91EA89CB300A8BFDB /* AddAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAccountViewController.swift; sourceTree = "<group>"; };
 		E2F1C97C1EAA8DA90034E0A7 /* KeyChainSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainSwift.swift; sourceTree = "<group>"; };
+		E2F1C97E1EAAA6B30034E0A7 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 				E24D21751EA4171A008C5C34 /* ViewUtils.swift */,
 				E24D21851EA72C87008C5C34 /* UIView+Layer.swift */,
 				E2F1C97C1EAA8DA90034E0A7 /* KeyChainSwift.swift */,
+				E2F1C97E1EAAA6B30034E0A7 /* Array+Extensions.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2C7AE701EA1814D00B4384A /* RetweetCell.swift in Sources */,
+				E2F1C97F1EAAA6B30034E0A7 /* Array+Extensions.swift in Sources */,
 				E2154E501E9F482800C8CEF2 /* OAuthClient.swift in Sources */,
 				E2154E621EA0640B00C8CEF2 /* Tweet.swift in Sources */,
 				E28794B71EA9871500BE7E9A /* UserAccountManagement.swift in Sources */,
