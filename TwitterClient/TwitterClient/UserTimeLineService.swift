@@ -19,18 +19,19 @@ let kUnfavorites       = "1.1/favorites/destroy.json"
 let kRetweeters        = "1.1/statuses/retweeters/ids.json"
 
 let kUserTimeLine      = "1.1/statuses/user_timeline.json"
+let kMentionsTimeLine  = "1.1/statuses/mentions_timeline.json"
 
 let kUserParam  = "user_id"
 let kCountParam = "count"
 let kMaxIDParam = "max_id"
 
-class UserTimeLineService {
+class TwitterAPIService {
     
     var timeLine = kHomeTimeLine
     
     let kMaxTweetCountPerRequest = 20 // @note: can go upto 200
     
-    var lastSeenLowestTweetID = Int.max
+    var apiToLastSeenIDMap = [String : Int]()
     
     var tweetsLoading = false
     
@@ -53,6 +54,7 @@ class UserTimeLineService {
     func fetchTweetsOlderThanLastFetch(success: @escaping (([Tweet]) -> Void),
                                        error:@escaping ((Error) -> Void)) {
         
+        let lastSeenLowestTweetID = apiToLastSeenIDMap[kHomeTimeLine]!
         guard lastSeenLowestTweetID < Int.max else {
             error(NSError(domain: "no more tweets available", code: 0, userInfo: nil));
             return;
@@ -77,6 +79,7 @@ class UserTimeLineService {
     func fetchTweetsOlderThanLastFetch(user : User, success: @escaping (([Tweet]) -> Void),
                                        error:@escaping ((Error) -> Void)) {
         
+        let lastSeenLowestTweetID = apiToLastSeenIDMap[kUserTimeLine]!
         guard lastSeenLowestTweetID < Int.max else {
             error(NSError(domain: "no more tweets available", code: 0, userInfo: nil));
             return;
@@ -88,6 +91,31 @@ class UserTimeLineService {
             kUserParam : user.userID!
         ]
         fetchTweets(kUserTimeLine, params: params, success: success, error: error)
+    }
+    
+    
+    // MARK: - mentions
+    func fetchMentionTweets(success: @escaping (([Tweet]) -> Void),
+                     error:@escaping ((Error) -> Void)) {
+        
+        let params = [kCountParam : kMaxTweetCountPerRequest]
+        fetchTweets(kMentionsTimeLine, params: params, success: success, error: error)
+    }
+    
+    func fetchMentionTweetsOlderThanLastFetch(success: @escaping (([Tweet]) -> Void),
+                                       error:@escaping ((Error) -> Void)) {
+        
+        let lastSeenLowestTweetID = apiToLastSeenIDMap[kMentionsTimeLine]!
+        guard lastSeenLowestTweetID < Int.max else {
+            error(NSError(domain: "no more tweets available", code: 0, userInfo: nil));
+            return;
+        }
+        
+        let params = [
+            kCountParam : kMaxTweetCountPerRequest,
+            kMaxIDParam :lastSeenLowestTweetID
+        ]
+        fetchTweets(kMentionsTimeLine, params: params, success: success, error: error)
     }
     
     
@@ -227,34 +255,37 @@ class UserTimeLineService {
         }
     }
     
-    internal func fetchTweets(_ timeLine : String, params : [String : Any], success: @escaping (([Tweet]) -> Void),
+    internal func fetchTweets(_ api : String, params : [String : Any], success: @escaping (([Tweet]) -> Void),
                      error:@escaping ((Error) -> Void)) {
         
         
-        oauthClient.get(timeLine,
-                                       parameters: params,
-                                       progress: nil,
-                                       success: { (task, response) in
-                                        if let dictionaries = response as? [NSDictionary] {
-                                            let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries);
-                                            self.saveLastSeenLowestTweetID(tweets: tweets)
-                                            success(tweets)
-                                        } else {
-                                            error(NSError(domain: "unable to fetcht tweets", code: 0, userInfo: nil))
-                                        }
+        oauthClient.get(api,
+                        parameters: params,
+                        progress: nil,
+                        success: { (task, response) in
+                            if let dictionaries = response as? [NSDictionary] {
+                                let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries);
+                                self.saveLastSeenLowestTweetID(tweets: tweets, api: api)
+                                success(tweets)
+                            } else {
+                                error(NSError(domain: "unable to fetch tweets", code: 0, userInfo: nil))
+                            }
         }) { (task, receivedError) in
             error(receivedError)
         }
     }
 
     
-    internal func saveLastSeenLowestTweetID(tweets : [Tweet]) {
-        lastSeenLowestTweetID = Int.max
+    internal func saveLastSeenLowestTweetID(tweets : [Tweet], api : String ) {
+        
+        var lastSeenLowestTweetID = Int.max
+        
         tweets.forEach { (tweet) in
             if let tweetID = tweet.tweetID {
                 lastSeenLowestTweetID = min(tweetID, lastSeenLowestTweetID)
             }
         }
+        apiToLastSeenIDMap[api] = lastSeenLowestTweetID
     }
     
 }

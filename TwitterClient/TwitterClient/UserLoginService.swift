@@ -1,5 +1,5 @@
 //
-//  UserLoginService.swift
+//  TwitterLoginService.swift
 //  TwitterClient
 //
 //  Created by Akshay Bhandary on 4/13/17.
@@ -23,7 +23,7 @@ let kAccessTokenMethod = "POST"
 
 
 
-class UserLoginService {
+class TwitterLoginService {
     
     var errorCompletionHandler : ((Error) -> Void)?
     var successCompletionHandler: ((Void) -> Void)?

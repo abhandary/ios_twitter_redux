@@ -20,6 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     static let kAccountsViewController = "AccountsViewController"
     static let kAddAccountViewController = "AddAccountViewController"
     
+    
+    static let kHomeTab = 1
+    static let kMentionsTab = 2
+    static let kMeTab = 3
+    
     var window: UIWindow?
 
     static let storyboard = UIStoryboard(name: "Main", bundle: nil)

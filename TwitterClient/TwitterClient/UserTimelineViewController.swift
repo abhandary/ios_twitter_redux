@@ -53,7 +53,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     
     var user : User?
     
-    let kMeTab = 1
+
     
 
     
@@ -118,7 +118,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return self.tabBarController!.tabBar.selectedItem!.tag == kMeTab;
+        return self.tabBarController!.tabBar.selectedItem!.tag == AppDelegate.kMeTab;
     }
     
     func longPress(gestureRecognizer: UIGestureRecognizer) {
@@ -205,7 +205,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     override func reloadTable() {
         
         if let user = user {
-            let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
+            let hud = MBProgressHUD.showAdded(to: self.tableView, animated: true);
             UserAccountManagement.sharedInstance.currentUserAccount.fetchTweets(user : user, success: { (tweets) in
                 hud.hide(animated: true);
                 self.tweets = tweets

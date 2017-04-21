@@ -11,9 +11,8 @@ import Foundation
 
 class UserAccount : NSObject {
     
-    var loginService : UserLoginService!
-    var homeTimeLineService : UserTimeLineService!
-    var userTimeLineService : UserTimeLineService!
+    var loginService : TwitterLoginService!
+    var apiService : TwitterAPIService!
     
     var successCompletionHandler : ((Void) -> Void)?
     var errorCompletionHandler : ((Error) -> Void)?
@@ -22,9 +21,8 @@ class UserAccount : NSObject {
         super.init()
         
         let oauthClient = OAuthClient.oauthAuthClient()
-        loginService = UserLoginService(oauthClient: oauthClient)
-        homeTimeLineService = UserTimeLineService(oauthClient: oauthClient)
-        userTimeLineService = UserTimeLineService(oauthClient: oauthClient)
+        loginService = TwitterLoginService(oauthClient: oauthClient)
+        apiService = TwitterAPIService(oauthClient: oauthClient)
     }
     
     convenience init(_ user : User) {
@@ -52,7 +50,7 @@ class UserAccount : NSObject {
         
         loginService.loginUser(success: { () in
             
-            self.homeTimeLineService.currentUser(success: { (user) in
+            self.apiService.currentUser(success: { (user) in
                 self.user = user
                 if self.isCurrentUserAccount == true {
                     User.currentUser = user
@@ -82,53 +80,62 @@ class UserAccount : NSObject {
     func fetchTweets(success: @escaping (([Tweet]) -> Void),
                      error:@escaping ((Error) -> Void)) {
         
-        homeTimeLineService.fetchTweets(success: success, error: error)
+        apiService.fetchTweets(success: success, error: error)
     }
     
     func fetchTweetsOlderThanLastFetch(success: @escaping (([Tweet]) -> Void),
                      error:@escaping ((Error) -> Void)) {
         
-        homeTimeLineService.fetchTweetsOlderThanLastFetch(success: success, error: error)
+        apiService.fetchTweetsOlderThanLastFetch(success: success, error: error)
     }
 
     func fetchTweets(user : User, success: @escaping (([Tweet]) -> Void),
                      error:@escaping ((Error) -> Void)) {
         
-        userTimeLineService.fetchTweets(user : user, success: success, error: error)
+        apiService.fetchTweets(user : user, success: success, error: error)
     }
     
     func fetchTweetsOlderThanLastFetch(user : User, success: @escaping (([Tweet]) -> Void),
                                        error:@escaping ((Error) -> Void)) {
         
-        userTimeLineService.fetchTweetsOlderThanLastFetch(user : user, success: success, error: error)
+        apiService.fetchTweetsOlderThanLastFetch(user : user, success: success, error: error)
+    }
+    
+    func fetchMentionTweets(success: @escaping (([Tweet]) -> Void),
+                            error:@escaping ((Error) -> Void)) {
+        
+        apiService.fetchMentionTweets(success: success, error: error)
+    }
+    
+    
+    func fetchMentionTweetsOlderThanLastFetch(success: @escaping (([Tweet]) -> Void),
+                                              error:@escaping ((Error) -> Void)) {
+        apiService.fetchMentionTweetsOlderThanLastFetch(success: success, error: error)
     }
 
-    
-    
+
     func post(statusUpdate : String,  success: @escaping ((Tweet)->()), error:@escaping ((Error)->Void)) {
-        homeTimeLineService.post(statusUpdate: statusUpdate, success: success, error: error)
+        apiService.post(statusUpdate: statusUpdate, success: success, error: error)
     }
     
     func post(statusUpdate : String, inReplyTo: Int, success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
-        homeTimeLineService.post(statusUpdate: statusUpdate, inReplyTo: inReplyTo, success: success, error: error)
+        apiService.post(statusUpdate: statusUpdate, inReplyTo: inReplyTo, success: success, error: error)
     }
     
     func post(retweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
-        homeTimeLineService.post(retweetID: retweetID, success: success, error: error)
+        apiService.post(retweetID: retweetID, success: success, error: error)
     }
     
     func post(unretweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
-        homeTimeLineService.post(unretweetID: unretweetID, success: success, error: error)
+        apiService.post(unretweetID: unretweetID, success: success, error: error)
     }
     
     func post(favoriteTweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
-        homeTimeLineService.post(favoriteTweetID: favoriteTweetID, success: success, error: error)
+        apiService.post(favoriteTweetID: favoriteTweetID, success: success, error: error)
     }
     
     func post(unfavoriteTweetID : Int,  success : @escaping (Tweet) -> (), error : @escaping (Error) -> ()) {
-        homeTimeLineService.post(unfavoriteTweetID: unfavoriteTweetID, success: success, error: error)
+        apiService.post(unfavoriteTweetID: unfavoriteTweetID, success: success, error: error)
     }
-    
-    
 }
 

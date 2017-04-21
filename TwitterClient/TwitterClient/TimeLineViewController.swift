@@ -57,17 +57,28 @@ class TimeLineViewController: UIViewController  {
     func reloadTable() {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
 
-        UserAccountManagement.sharedInstance.currentUserAccount.fetchTweets(success: { (tweets) in
-                hud.hide(animated: true);
-                self.tweets = tweets
-                self.refreshControl.endRefreshing()
-                self.tableView.reloadData()
-            }, error: { (receivedError) in
-                hud.hide(animated: true);
-                ViewUtils.showToast(view: self.networkErrorView)
-                self.refreshControl.endRefreshing()
-                print(receivedError)
-        })
+        
+        let successBlock : ([Tweet]) -> ()  = { (tweets) in
+            hud.hide(animated: true);
+            self.tweets = tweets
+            self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
+        }
+        
+        let errorBlock : (Error) -> () = { (receivedError) in
+            hud.hide(animated: true);
+            ViewUtils.showToast(view: self.networkErrorView)
+            self.refreshControl.endRefreshing()
+            print(receivedError)
+        }
+        
+        if let userAccount = UserAccountManagement.sharedInstance.currentUserAccount {
+            if self.tabBarController!.tabBar.selectedItem!.tag == AppDelegate.kHomeTab {
+                userAccount.fetchTweets(success: successBlock, error: errorBlock)
+            } else {
+                userAccount.fetchMentionTweets(success: successBlock, error: errorBlock)
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -252,17 +263,29 @@ extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
                 isMoreDataLoading = true
                 let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
-                UserAccountManagement.sharedInstance.currentUserAccount.fetchTweetsOlderThanLastFetch(success: { (tweets) in
+                
+                
+                let successBlock : ([Tweet]) -> ()  = { (tweets) in
                     hud.hide(animated: true);
                     self.isMoreDataLoading = false
                     self.tweets?.append(contentsOf: tweets)
                     self.tableView.reloadData()
-                    }, error: { (receivedError) in
-                        self.isMoreDataLoading = false
-                        hud.hide(animated: true);                        
-                        // @todo: show error banner
-                        print(receivedError)
-                })
+                }
+                
+                let errorBlock : (Error) -> () = { (receivedError) in
+                    self.isMoreDataLoading = false
+                    hud.hide(animated: true);
+                    // @todo: show error banner
+                    print(receivedError)
+                }
+                
+                if let userAccount = UserAccountManagement.sharedInstance.currentUserAccount {
+                    if self.tabBarController!.tabBar.selectedItem!.tag == AppDelegate.kHomeTab {
+                        userAccount.fetchTweetsOlderThanLastFetch(success:successBlock, error: errorBlock)
+                    } else {
+                        userAccount.fetchMentionTweetsOlderThanLastFetch(success: successBlock, error: errorBlock)
+                    }
+                }
             }
         }
     }
