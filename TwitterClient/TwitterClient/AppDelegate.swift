@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
         
         // Override point for customization after application launch.
-        if let _ = UserAccount.currentUserAccount.user {
+        if let _ = UserAccountManagement.sharedInstance.currentUserAccount.user {
             userLoggedIn()
         }
         return true
@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 
-        UserAccount.currentUserAccount.receivedOauthToken(url: url, success: { () in
+        UserAccountManagement.sharedInstance.currentUserAccount.receivedOauthToken(url: url, success: { () in
             }, error: { (receivedError) in
                 print(receivedError)
         })

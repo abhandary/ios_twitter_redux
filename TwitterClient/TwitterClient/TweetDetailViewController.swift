@@ -118,11 +118,11 @@ class TweetDetailViewController: UIViewController {
             }
             
             if tweet.retweeted == false {
-                UserAccount.currentUserAccount.post(retweetID: tweetID, success: successBlock, error: errorBlock)
+                UserAccountManagement.sharedInstance.currentUserAccount.post(retweetID: tweetID, success: successBlock, error: errorBlock)
             } else {
                 if let originalTweetIDStr = tweet.originalTweetID,
                     let originalID = Int(originalTweetIDStr) {
-                    UserAccount.currentUserAccount.post(unretweetID: originalID, success: successBlock, error: errorBlock)
+                    UserAccountManagement.sharedInstance.currentUserAccount.post(unretweetID: originalID, success: successBlock, error: errorBlock)
                 } else {
                     errorBlock(NSError(domain: "No original ID in retweet", code: 0, userInfo: nil))
                 }
@@ -147,9 +147,9 @@ class TweetDetailViewController: UIViewController {
 
             
             if tweet.favorited! == false {
-                UserAccount.currentUserAccount.post(favoriteTweetID: tweetID, success: successBlock, error: errorBlock)
+                UserAccountManagement.sharedInstance.currentUserAccount.post(favoriteTweetID: tweetID, success: successBlock, error: errorBlock)
             } else {
-                UserAccount.currentUserAccount.post(unfavoriteTweetID: tweetID, success: successBlock, error: errorBlock)
+                UserAccountManagement.sharedInstance.currentUserAccount.post(unfavoriteTweetID: tweetID, success: successBlock, error: errorBlock)
             }
         }
     }

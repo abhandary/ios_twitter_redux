@@ -26,45 +26,14 @@ class UserAccount {
         userTimeLineService = UserTimeLineService(oauthClient: oauthClient)
     }
     
-    static var _allAccounts : [UserAccount]?
-    static var allAccounts : [UserAccount]! {
-        set (allAccounts) {
-            _allAccounts = allAccounts
-        }
-        get {
-            if _allAccounts == nil {
-                _allAccounts = [UserAccount]()
-            }
-            return _allAccounts
-        }
+    convenience init(_ user : User) {
+        self.init()
+        self.user = user
     }
     
     var user : User?
     var isCurrentUserAccount : Bool = false
     
-    // MARK: - construction / init routines
-    static var _currentUserAccount : UserAccount?
-    static var currentUserAccount : UserAccount! {
-        set (userAccount) {
-            if userAccount == nil {
-                _currentUserAccount?.loginService.logoutUser()
-                _currentUserAccount?.user = nil
-            }
-            _currentUserAccount = userAccount
-            User.currentUser = userAccount.user
-            _currentUserAccount?.isCurrentUserAccount = true
-        }
-        
-        get {
-            if _currentUserAccount == nil {
-                _currentUserAccount = UserAccount()
-                _currentUserAccount?.isCurrentUserAccount = true
-                _currentUserAccount?.user = User.currentUser
-                self.allAccounts.append(_currentUserAccount!)
-            }
-            return _currentUserAccount
-        }
-    }
 
     // MARK: - public routines
     
@@ -87,6 +56,7 @@ class UserAccount {
                 if self.isCurrentUserAccount == true {
                     User.currentUser = user
                 }
+                UserAccountManagement.sharedInstance.saveAllAccountsToDisk()
                 self.successCompletionHandler?()
                 }, error: { (receivedError) in
                     self.errorCompletionHandler?(receivedError)

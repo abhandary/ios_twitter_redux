@@ -127,10 +127,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="196" id="dMS-lR-QkG" customClass="TweetCell" customModule="TwitterClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="196"/>
+                                        <rect key="frame" x="0.0" y="28" width="1000" height="196"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dMS-lR-QkG" id="0Zk-5t-FEG">
-                                            <frame key="frameInset" width="375" height="195"/>
+                                            <frame key="frameInset" width="1000" height="195.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0p-IT-VUP" userLabel="Name and Text View">
@@ -268,10 +268,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReplyTweetCell" rowHeight="196" id="Ii1-ez-5q2" customClass="ReplyTweetCell" customModule="TwitterClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="224" width="375" height="196"/>
+                                        <rect key="frame" x="0.0" y="224" width="1000" height="196"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ii1-ez-5q2" id="LS4-JD-sHD">
-                                            <frame key="frameInset" width="375" height="195"/>
+                                            <frame key="frameInset" width="1000" height="195.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8TN-2h-vRY" userLabel="Name and Text View">
@@ -430,10 +430,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RetweetCell" rowHeight="196" id="UtX-5S-crG" customClass="RetweetCell" customModule="TwitterClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="420" width="375" height="196"/>
+                                        <rect key="frame" x="0.0" y="420" width="1000" height="196"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UtX-5S-crG" id="FMs-fi-wfe">
-                                            <frame key="frameInset" width="375" height="195"/>
+                                            <frame key="frameInset" width="1000" height="195.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1U-LL-VCy" userLabel="Retweeted View">
@@ -1123,7 +1123,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lk4-0E-vqt" id="gef-rb-LHM">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1296,10 +1296,10 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="196" id="3xW-QY-KcY" customClass="TweetCell" customModule="TwitterClient" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="375" height="196"/>
+                                                <rect key="frame" x="0.0" y="28" width="1000" height="196"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3xW-QY-KcY" id="wDr-ae-aTX">
-                                                    <frame key="frameInset" width="375" height="195"/>
+                                                    <frame key="frameInset" width="1000" height="195.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FAc-f4-5Uc" userLabel="Name and Text View">
@@ -1436,10 +1436,10 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReplyTweetCell" rowHeight="196" id="Uxd-uR-Zdr" customClass="ReplyTweetCell" customModule="TwitterClient" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="224" width="375" height="196"/>
+                                                <rect key="frame" x="0.0" y="224" width="1000" height="196"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uxd-uR-Zdr" id="MEU-f1-WVx">
-                                                    <frame key="frameInset" width="375" height="195"/>
+                                                    <frame key="frameInset" width="1000" height="195.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dau-Sz-oWd" userLabel="Name and Text View">
@@ -1597,10 +1597,10 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RetweetCell" rowHeight="196" id="XUz-u4-QQG" customClass="RetweetCell" customModule="TwitterClient" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="420" width="375" height="196"/>
+                                                <rect key="frame" x="0.0" y="420" width="1000" height="196"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XUz-u4-QQG" id="226-Kn-ahI">
-                                                    <frame key="frameInset" width="375" height="195"/>
+                                                    <frame key="frameInset" width="1000" height="195.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zIL-wh-6Lq" userLabel="Retweeted View">
@@ -1890,7 +1890,7 @@
                                     <constraint firstAttribute="height" constant="44" id="I73-Q4-wVb"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="Add Account" id="avy-wM-vlD">
+                                    <navigationItem title="Account Login" id="avy-wM-vlD">
                                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="KyP-nX-kGz"/>
                                     </navigationItem>
                                 </items>
@@ -1945,7 +1945,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bgT-7N-Hcz" id="vO1-9n-tuE">
-                                            <frame key="frameInset" width="375" height="54"/>
+                                            <frame key="frameInset" width="375" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mtc-5x-q6w" userLabel="Delete View">
@@ -1976,6 +1976,7 @@
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstItem="2wN-XP-33u" firstAttribute="leading" secondItem="5kg-qF-vAm" secondAttribute="trailing" constant="15" id="AnD-Xe-KeK"/>
                                                         <constraint firstItem="5kg-qF-vAm" firstAttribute="centerY" secondItem="lFV-l6-43X" secondAttribute="centerY" id="C2X-59-OqA"/>
@@ -2000,6 +2001,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="cellFGViewLeadingSpaceConstraint" destination="tz6-5A-YxX" id="Z1U-QU-Yme"/>
                                             <outlet property="thumbNailImage" destination="5kg-qF-vAm" id="Q3z-JI-6ZM"/>
                                             <outlet property="userName" destination="2wN-XP-33u" id="zNQ-1G-WJA"/>
                                             <outlet property="userScreenName" destination="Chh-dw-tqt" id="f2j-iP-50C"/>
@@ -2009,7 +2011,7 @@
                                         <rect key="frame" x="0.0" y="83" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ztu-Id-G0N" id="qTD-eg-Bay">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add an existing account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXw-tx-pPv">

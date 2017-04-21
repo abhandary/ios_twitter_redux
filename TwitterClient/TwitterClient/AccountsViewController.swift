@@ -16,7 +16,7 @@ class AccountsViewController: UIViewController {
     // controller to login user into an existing account
     var addAccountViewController  : AddAccountViewController?
     
-    
+    var allAccounts : [UserAccount]!
     var currentAccountIndex : Int!
     
     let kAccountsCell = "AccountsCell"
@@ -25,13 +25,13 @@ class AccountsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        allAccounts = UserAccountManagement.sharedInstance.allAccounts
         
         // get the index corresponding to the current user
-        for ix in 0..<UserAccount.allAccounts.count {
+        for ix in 0..<allAccounts.count {
             
-            if let currentUser = UserAccount.currentUserAccount.user,
-                let user = UserAccount.allAccounts[ix].user,
+            if let currentUser = UserAccountManagement.sharedInstance.currentUserAccount.user,
+                let user = allAccounts[ix].user,
                 user.userID! == currentUser.userID! {
                 
                 currentAccountIndex = ix
@@ -53,14 +53,14 @@ class AccountsViewController: UIViewController {
 extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return UserAccount.allAccounts.count + 1
+        return allAccounts.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row < UserAccount.allAccounts.count {
+        if indexPath.row < allAccounts.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: kAccountsCell) as! AccountsCell
-            cell.user = UserAccount.allAccounts[indexPath.row].user
+            cell.user = allAccounts[indexPath.row].user
             if indexPath.row == currentAccountIndex {
                 cell.accessoryType = .checkmark
             }  else {
@@ -74,36 +74,36 @@ extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == UserAccount.allAccounts.count {
+        if indexPath.row == allAccounts.count {
             addNewAccount()
         } else {
-            UserAccount.currentUserAccount = UserAccount.allAccounts[indexPath.row]
+            UserAccountManagement.sharedInstance.currentUserAccount = allAccounts[indexPath.row]
             self.tableView.reloadData()
         }
     }
     
     func addNewAccount() {
         
-        let previousCurrentUserAccount = UserAccount.currentUserAccount
+        let previousCurrentUserAccount = UserAccountManagement.sharedInstance.currentUserAccount
         let userAccount = UserAccount()
         
         // need to preemptively switch current account, as the AppDelgate uses the
         // 'current account' to pass the received token
-        UserAccount.currentUserAccount = userAccount
+        UserAccountManagement.sharedInstance.currentUserAccount = userAccount
         userAccount.loginUser(success: { () in
             
             // all is good here, able to add the new account
             self.addAccountViewController?.dismiss(animated: true, completion:nil)
-            
+            self.tableView.reloadData()
             // commit this new user account to the 'all accounts' list
-            UserAccount.allAccounts.append(userAccount)
+            UserAccountManagement.sharedInstance.addAccount(userAccount)
             }, error: { (error) in
                 
                 // failed to log in the user
                 self.addAccountViewController?.dismiss(animated: true, completion: nil)
                 
                 // restore the current user account to the previous current account
-                UserAccount.currentUserAccount = previousCurrentUserAccount
+                UserAccountManagement.sharedInstance.currentUserAccount = previousCurrentUserAccount
         }) { (requestTokenURL) in
             self.receivedRequestToken(url: requestTokenURL)
         }

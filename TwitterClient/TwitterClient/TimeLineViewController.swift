@@ -57,7 +57,7 @@ class TimeLineViewController: UIViewController  {
     func reloadTable() {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
 
-        UserAccount.currentUserAccount.fetchTweets(success: { (tweets) in
+        UserAccountManagement.sharedInstance.currentUserAccount.fetchTweets(success: { (tweets) in
                 hud.hide(animated: true);
                 self.tweets = tweets
                 self.refreshControl.endRefreshing()
@@ -77,7 +77,7 @@ class TimeLineViewController: UIViewController  {
     
     @IBAction func logOutButtonPressed(_ sender: AnyObject) {
         
-        UserAccount.currentUserAccount = nil
+        UserAccountManagement.sharedInstance.currentUserAccount = nil
         
         // currently only the AppDelegate listens to this notification, this is required because the current
         // implementation swaps root view controllers. The use of delegates is not straightforward in this implementation
@@ -157,11 +157,11 @@ extension TimeLineViewController : TweetCellDelegate {
         
         if  let tweetID = sender.tweet.tweetID {
             if sender.tweet.retweeted == false {
-                UserAccount.currentUserAccount.post(retweetID: tweetID, success: retweetSuccessBlock, error: errorBlock)
+                UserAccountManagement.sharedInstance.currentUserAccount.post(retweetID: tweetID, success: retweetSuccessBlock, error: errorBlock)
             } else {
                 if let originalTweetIDStr = sender.tweet.originalTweetID,
                     let originalID = Int(originalTweetIDStr) {
-                    UserAccount.currentUserAccount.post(unretweetID: originalID, success: unretweetSuccessBlock, error: errorBlock)
+                    UserAccountManagement.sharedInstance.currentUserAccount.post(unretweetID: originalID, success: unretweetSuccessBlock, error: errorBlock)
                 } else {
                     errorBlock(NSError(domain: "No original ID in retweet", code: 0, userInfo: nil))
                 }
@@ -183,9 +183,9 @@ extension TimeLineViewController : TweetCellDelegate {
             }
 
             if sender.tweet.favorited! == true {
-                UserAccount.currentUserAccount.post(unfavoriteTweetID: tweetID, success:successBlock, error: errorBlock)
+                UserAccountManagement.sharedInstance.currentUserAccount.post(unfavoriteTweetID: tweetID, success:successBlock, error: errorBlock)
             } else {
-                UserAccount.currentUserAccount.post(favoriteTweetID: tweetID, success: successBlock, error:errorBlock)
+                UserAccountManagement.sharedInstance.currentUserAccount.post(favoriteTweetID: tweetID, success: successBlock, error:errorBlock)
             }
         }
     }
@@ -218,7 +218,7 @@ extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
             return cell
         } else if let _ = tweet.inReplyToScreenname,
             let userID = tweet.user!.userID,
-            let currentUser = UserAccount.currentUserAccount.user,
+            let currentUser = UserAccountManagement.sharedInstance.currentUserAccount.user,
             let currentUserID = currentUser.userID,
             userID == currentUserID {
             
@@ -252,7 +252,7 @@ extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
                 isMoreDataLoading = true
                 let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
-                UserAccount.currentUserAccount.fetchTweetsOlderThanLastFetch(success: { (tweets) in
+                UserAccountManagement.sharedInstance.currentUserAccount.fetchTweetsOlderThanLastFetch(success: { (tweets) in
                     hud.hide(animated: true);
                     self.isMoreDataLoading = false
                     self.tweets?.append(contentsOf: tweets)

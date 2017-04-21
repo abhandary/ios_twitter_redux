@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class AddAccountViewController: UIViewController {
 
     @IBOutlet weak var webView: UIWebView!
     
     var url : URL?
+    
+    var hud : MBProgressHUD?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +25,8 @@ class AddAccountViewController: UIViewController {
        // URLCache.shared.memoryCapacity = 0
         
         if let url = url {
+            webView.delegate = self
+            hud = MBProgressHUD.showAdded(to: self.view, animated: true);
             webView.loadRequest(URLRequest(url: url))
         }
         
@@ -44,4 +49,19 @@ class AddAccountViewController: UIViewController {
     }
     */
 
+}
+
+
+extension AddAccountViewController : UIWebViewDelegate {
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        hud?.hide(animated: true)
+        hud = nil
+    }
+    
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        hud?.hide(animated: true)
+        hud = nil
+    }
+    
 }

@@ -68,7 +68,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         self.tabBarController!.tabBar.addGestureRecognizer(longPressGR)
         
         // default to the current user is a user wasn't passed in
-        user = user ?? UserAccount.currentUserAccount.user
+        user = user ?? UserAccountManagement.sharedInstance.currentUserAccount.user
 
         let panGR = UIPanGestureRecognizer(target: self, action: #selector(headeriewPanGesture(_:)));
         headerView.addGestureRecognizer(panGR)
@@ -133,7 +133,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         UIView.animate(withDuration: 0.4) {
             
             self.view.layoutIfNeeded()
-            let yOffset : CGFloat = (44.0 * 2.0).adding(CGFloat(55 * UserAccount.allAccounts.count)).adding(20)
+            let yOffset : CGFloat = (44.0 * 2.0).adding(CGFloat(55 * UserAccountManagement.sharedInstance.allAccounts.count)).adding(20)
             self.accountsVCView?.frame = (self.accountsVCView!.frame.offsetBy(dx: 0, dy: -yOffset))
         }
     }
@@ -151,7 +151,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
             UIView.animate(withDuration: 0.4, animations: {
 
                     self.view.layoutIfNeeded()
-                    let yOffset : CGFloat = (44.0 * 2.0).adding(CGFloat(55 * UserAccount.allAccounts.count)).adding(20)
+                    let yOffset : CGFloat = (44.0 * 2.0).adding(CGFloat(55 * UserAccountManagement.sharedInstance.allAccounts.count)).adding(20)
                     self.accountsVCView?.frame = (self.accountsVCView!.frame.offsetBy(dx: 0, dy: yOffset))
                 }, completion: { (boolVal) in
                     // self.accountsVCView?.removeFromSuperview()
@@ -200,7 +200,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         
         if let user = user {
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
-            UserAccount.currentUserAccount.fetchTweets(user : user, success: { (tweets) in
+            UserAccountManagement.sharedInstance.currentUserAccount.fetchTweets(user : user, success: { (tweets) in
                 hud.hide(animated: true);
                 self.tweets = tweets
                 self.refreshControl.endRefreshing()
@@ -270,7 +270,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
                 isMoreDataLoading = true
                 let hud = MBProgressHUD.showAdded(to: self.view, animated: true);
-                UserAccount.currentUserAccount.fetchTweetsOlderThanLastFetch(user : user!,
+                UserAccountManagement.sharedInstance.currentUserAccount.fetchTweetsOlderThanLastFetch(user : user!,
                                                                               success: { (tweets) in
                     hud.hide(animated: true);
                     self.isMoreDataLoading = false
