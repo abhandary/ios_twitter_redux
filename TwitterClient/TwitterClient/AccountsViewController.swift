@@ -25,18 +25,16 @@ class AccountsViewController: UIViewController {
     var addAccountViewController  : AddAccountViewController?
     
     var allAccounts : [UserAccount]!
-    var currentAccountIndex : Int!
     
     let kAccountsCell = "AccountsCell"
     let kAddAccountCell = "AddAccountCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        updateAllAccounts()
+        
         tableView.delegate = self
         tableView.dataSource = self
-        // Do any additional setup after loading the view.
+        reloadTable()
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,19 +42,9 @@ class AccountsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func updateAllAccounts() {
+    func reloadTable() {
         allAccounts = UserAccountManagement.sharedInstance.allAccounts
-        
-        // get the index corresponding to the current user
-        for ix in 0..<allAccounts.count {
-            
-            if let currentUser = UserAccountManagement.sharedInstance.currentUserAccount.user,
-                let user = allAccounts[ix].user,
-                user.userID! == currentUser.userID! {
-                
-                currentAccountIndex = ix
-            }
-        }
+        self.tableView.reloadData()
     }
     
 }
@@ -73,11 +61,6 @@ extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: kAccountsCell) as! AccountsCell
             cell.userAccount = allAccounts[indexPath.row]
             cell.delegate = self
-            if indexPath.row == currentAccountIndex {
-                cell.accessoryType = .checkmark
-            }  else {
-                cell.accessoryType = .none
-            }
             return cell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: kAddAccountCell)!
@@ -90,7 +73,6 @@ extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
             addNewAccount()
         } else {
             UserAccountManagement.sharedInstance.currentUserAccount = allAccounts[indexPath.row]
-            currentAccountIndex = indexPath.row
             self.delegate?.accountSwitched(sender: self, userAccount: allAccounts[indexPath.row])
             self.tableView.reloadData()
         }
@@ -106,24 +88,26 @@ extension AccountsViewController : UITableViewDelegate, UITableViewDataSource {
         UserAccountManagement.sharedInstance.currentUserAccount = userAccount
         userAccount.loginUser(success: { () in
             
-            // all is good here, able to add the new account
+            // 1. all is good here, able to add the new account
             self.addAccountViewController?.dismiss(animated: true, completion:nil)
             
-            // commit this new user account to the 'all accounts' list
+            // 2. commit this new user account to the 'all accounts' list
             UserAccountManagement.sharedInstance.addAccount(userAccount)
             
-            // reload the local copy of the list and reload the table view and
-            // notify delegate so it can change the offset of the accounts view if required
-            self.updateAllAccounts()
-            self.tableView.reloadData()
+            // 3. update accounts table view
+            self.reloadTable()
+            
+            // 4. notify delegate of account update
             self.delegate?.accountsUpdated(sender: self)
+            
+            // 5. notify delegate so it can change the offset of the accounts view if required
             self.delegate?.accountSwitched(sender: self, userAccount: userAccount)
             }, error: { (error) in
                 
-                // failed to log in the user
+                // 1. failed to log in the user
                 self.addAccountViewController?.dismiss(animated: true, completion: nil)
                 
-                // restore the current user account to the previous current account
+                // 2. restore the current user account to the previous current account
                 UserAccountManagement.sharedInstance.currentUserAccount = previousCurrentUserAccount
         }) { (requestTokenURL) in
             self.receivedRequestToken(url: requestTokenURL)
@@ -147,9 +131,22 @@ extension AccountsViewController : AccountsCellDelegate {
             // last user, log out after confirmation
             confirmLogout(sender)
         } else {
-            // remove user, pick another one if this is the current user
+            // 1. remove user, pick another one if this is the current user
+            let switchingAccounts = sender.userAccount.isCurrentUserAccount
             UserAccountManagement.sharedInstance.remove(userAccount: sender.userAccount)
-            updateAllAccounts()
+
+            // 2. update the accounts table view
+            reloadTable()
+
+            // 3. notify delegate of account update
+            self.delegate?.accountsUpdated(sender: self)
+
+            // 4. If this is an account switch, notify the delegate
+            let newCurrentAccount = UserAccountManagement.sharedInstance.currentUserAccount
+            if switchingAccounts == true,
+                let newCurrentAccount = newCurrentAccount {
+                self.delegate?.accountSwitched(sender: self, userAccount: newCurrentAccount)
+            }
         }
     }
     
@@ -171,8 +168,6 @@ extension AccountsViewController : AccountsCellDelegate {
     
     func selected(sender: AccountsCell) {
         
-        // updateAllAccounts()
-        // self.delegate?.accountSwitched(sender: self, userAccount: sender.userAccount)
     }
 
 }

@@ -49,9 +49,10 @@ class UserAccountManagement {
                 let count = self._allAccounts?.count ?? 0
                 if userAccount.isCurrentUserAccount == true && count > 1 {
                     // need to pick a new user account
-                    for account in self.allAccounts {
+                    for account in self._allAccounts! {
                         if account.isCurrentUserAccount == false {
-                            account.isCurrentUserAccount = true
+                            self.set(currentUserAccount: account)
+                            break
                         }
                     }
                 }
@@ -167,7 +168,9 @@ class UserAccountManagement {
         } else {
             User.currentUser = currentUserAccount?.user
         }
-        
+        for account in _allAccounts! {
+            account.isCurrentUserAccount = false
+        }
         _currentUserAccount = currentUserAccount
         _currentUserAccount?.isCurrentUserAccount = true
     }

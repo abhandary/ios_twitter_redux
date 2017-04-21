@@ -29,9 +29,15 @@ class AccountsCell: UITableViewCell {
     var userAccount : UserAccount! {
         didSet {
             if let user = userAccount.user {
+                cellFGViewLeadingSpaceConstraint.constant = 0
                 thumbNailImage.setImageWith(user.profileURL!)
                 userName.text = user.name
                 userScreenName.text = user.screename
+                if userAccount.isCurrentUserAccount == true {
+                    accessoryType = .checkmark
+                }  else {
+                    accessoryType = .none
+                }
             }
         }
     }
