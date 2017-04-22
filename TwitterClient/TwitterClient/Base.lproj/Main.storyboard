@@ -1371,31 +1371,15 @@
                                                             <constraint firstAttribute="width" constant="60" id="n8c-nA-Nzq"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0r-yY-de1">
-                                                        <state key="normal" title="Button"/>
-                                                    </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m52-Zv-QpJ" userLabel="Back Button">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                        <state key="normal" title="&lt;">
-                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="backButtonPressed:" destination="Wtz-Lt-vyf" eventType="touchUpInside" id="kjV-nx-F1d"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="d0r-yY-de1" secondAttribute="trailing" constant="30" id="0c6-1t-d7a"/>
                                                     <constraint firstAttribute="bottom" secondItem="jfx-v4-55O" secondAttribute="bottom" id="17F-MR-9DI"/>
                                                     <constraint firstAttribute="trailing" secondItem="vVU-1E-fbF" secondAttribute="trailing" id="Mob-Wc-XD3"/>
                                                     <constraint firstItem="vVU-1E-fbF" firstAttribute="leading" secondItem="7g3-WO-CMw" secondAttribute="leading" id="NTx-hC-8BG"/>
                                                     <constraint firstItem="jfx-v4-55O" firstAttribute="leading" secondItem="7g3-WO-CMw" secondAttribute="leading" constant="20" id="Nza-5E-BaC"/>
                                                     <constraint firstItem="vVU-1E-fbF" firstAttribute="height" secondItem="7g3-WO-CMw" secondAttribute="height" multiplier="0.7" id="VyU-zh-cur"/>
                                                     <constraint firstItem="vVU-1E-fbF" firstAttribute="top" secondItem="7g3-WO-CMw" secondAttribute="top" id="XHV-tL-9Tl"/>
-                                                    <constraint firstItem="d0r-yY-de1" firstAttribute="top" secondItem="vVU-1E-fbF" secondAttribute="bottom" constant="10" id="pf1-km-ihn"/>
-                                                    <constraint firstItem="m52-Zv-QpJ" firstAttribute="top" secondItem="7g3-WO-CMw" secondAttribute="top" constant="5" id="xbf-DQ-ogw"/>
-                                                    <constraint firstItem="m52-Zv-QpJ" firstAttribute="leading" secondItem="7g3-WO-CMw" secondAttribute="leading" constant="10" id="xoR-KV-OZZ"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbH-EM-OD2" userLabel="Header View Bottom Half">
