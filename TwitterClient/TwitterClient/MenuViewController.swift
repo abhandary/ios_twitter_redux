@@ -61,7 +61,8 @@ class MenuViewController: UITableViewController {
             getTabBarController()?.selectedIndex = AppDelegate.kMeTab
         default:
             if indexPath.row == kSettingsAccounts {
-                
+                AppDelegate.showAccountView = true
+                getTabBarController()?.selectedIndex = AppDelegate.kMeTab
             } else if indexPath.row == kSettingsAbout {
                 
             } else if indexPath.row == kSettingsLogout {

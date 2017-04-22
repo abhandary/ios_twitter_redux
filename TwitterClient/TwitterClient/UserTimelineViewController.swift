@@ -54,7 +54,13 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     var user : User?
     
 
-    
+    override func viewWillAppear(_ animated: Bool) {
+        if AppDelegate.showAccountView == true {
+            showAccountsView()
+        }
+        AppDelegate.showAccountView = false
+        super.viewWillAppear(animated)
+    }
 
     
     var accountViewState : AccountViewState = .notPresented
@@ -122,11 +128,15 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     }
     
     func longPress(gestureRecognizer: UIGestureRecognizer) {
+        showAccountsView()
+    }
+    
+    func showAccountsView() {
         
         guard accountViewState == .notPresented else { return; }
         
         accountsVC?.didMove(toParentViewController: self)
-
+        
         maskView.backgroundColor = .black
         
         self.maskView.alpha = 0.3

@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     static let kMeTab = 2
     
     var window: UIWindow?
+    
+    static var showAccountView = false
 
     static let storyboard = UIStoryboard(name: "Main", bundle: nil)
     
