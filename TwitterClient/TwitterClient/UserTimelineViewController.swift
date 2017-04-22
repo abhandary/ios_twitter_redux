@@ -191,16 +191,29 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
                 self.topLevelViewToTopConstraint.constant = 0
             }
         } else if sender.state == .changed {
-            self.topLevelViewToTopConstraint.constant = point.y
-        } else {
-            if velocity.y > 0 {
+            if point.y > 0 {
                 self.topLevelViewToTopConstraint.constant = 0
             } else {
-                self.topLevelViewToTopConstraint.constant = -(self.headerView.frame.height - 44)
+                self.topLevelViewToTopConstraint.constant = point.y
             }
+        } else {
+            moveHeader(collapse: velocity.y <= 0)
         }
     }
 
+    
+    func moveHeader(collapse : Bool) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.4, animations: { 
+                if collapse == false {
+                    self.topLevelViewToTopConstraint.constant = 0
+                } else {
+                    self.topLevelViewToTopConstraint.constant = -(self.headerView.frame.height - 44)
+                }
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
     
     override func reloadTable() {
         
