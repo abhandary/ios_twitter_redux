@@ -21,9 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     static let kAddAccountViewController = "AddAccountViewController"
     
     
-    static let kHomeTab = 1
-    static let kMentionsTab = 2
-    static let kMeTab = 3
+    static let kHomeTab = 0
+    static let kMentionsTab = 1
+    static let kMeTab = 2
     
     var window: UIWindow?
 

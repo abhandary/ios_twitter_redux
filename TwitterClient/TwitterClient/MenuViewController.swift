@@ -8,39 +8,83 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: UITableViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    let kSectionTimelines = 0
+    let kSectionApplication = 1
+    let kSectionSettings = 2
     
-    let kHamburgerMenuTableViewCell = "HamburgerMenuTableViewCell"
+    let kHomeTimeline = 0
+    let kMentions     = 1
     
-    let menuItems = ["Profile", "Timeline", "Mentions", "Accounts", "Logout"]
+    let kSettingsAccounts = 0
+    let kSettingsAbout    = 1
+    let kSettingsLogout   = 2
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let count = CGFloat(self.menuItems.count)
-        self.tableView.rowHeight = self.view.frame.height / count
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+    
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func getTabBarController() -> UITabBarController? {
+        
+        if let hamburgerVC = self.view.window?.rootViewController as? HamburgerViewController {
+            for controller in hamburgerVC.childViewControllers {
+                if controller.isKind(of: UITabBarController.self) {
+                    return controller as? UITabBarController
+                }
+            }
+        }
+        return nil;
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch  indexPath.section {
+        case kSectionTimelines:
+            if indexPath.row == 0 {
+                getTabBarController()?.selectedIndex = AppDelegate.kHomeTab
+            } else {
+                getTabBarController()?.selectedIndex = AppDelegate.kMentionsTab
+            }
+        case kSectionApplication:
+            getTabBarController()?.selectedIndex = AppDelegate.kMeTab
+        default:
+            if indexPath.row == kSettingsAccounts {
+                
+            } else if indexPath.row == kSettingsAbout {
+                
+            } else if indexPath.row == kSettingsLogout {
+                logout()
+            }
+
+        }
+        
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        if let hamburgerVC = self.view.window?.rootViewController as? HamburgerViewController {
+            hamburgerVC.toggleLeft()
+        }
+
+    }
+    
+    func logout() {
+        let userAccount = UserAccountManagement.sharedInstance.currentUserAccount
+        userAccount?.logOutUser()
+        UserAccountManagement.sharedInstance.currentUserAccount = nil
+        NotificationCenter.default.post(name: Notification.Name(rawValue: TimeLineViewController.kNotificationUserLoggedOut), object: self)
+    }
+    
 }
 
-extension MenuViewController : UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.menuItems.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: kHamburgerMenuTableViewCell)!
-        cell.textLabel?.text = menuItems[indexPath.row]
-        return cell
-    }
-    
-}
 
 
