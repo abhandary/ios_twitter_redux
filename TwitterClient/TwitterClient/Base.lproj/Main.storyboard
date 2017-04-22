@@ -1140,7 +1140,7 @@
                         <outlet property="contentViewLeadingConstraint" destination="hyQ-73-OFH" id="izi-vg-8gR"/>
                         <outlet property="menuView" destination="xhq-4M-5n1" id="ddW-ic-J95"/>
                         <segue destination="ZY5-og-Nnc" kind="custom" identifier="HamburgerContentSegue" customClass="HamburgerContentSegue" customModule="TwitterClient" id="nqQ-lM-3JF"/>
-                        <segue destination="Ssg-qf-9Bo" kind="custom" identifier="HamburgerMenuSegue" customClass="HamburgerMenuSegue" customModule="TwitterClient" id="3lx-Fp-RVV"/>
+                        <segue destination="Nge-ty-6Rh" kind="custom" identifier="HamburgerMenuSegue" customClass="HamburgerMenuSegue" customModule="TwitterClient" id="3lx-Fp-RVV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M61-Rs-Wqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1165,7 +1165,7 @@
                             <tableViewSection headerTitle="Timelines" id="adV-MD-xsg">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="ewr-SF-j2c" style="IBUITableViewCellStyleDefault" id="ijz-aj-LM9">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="120" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ijz-aj-LM9" id="ghb-Mh-9Ew">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -1190,7 +1190,7 @@
                                         <color key="backgroundColor" red="0.30196078430000001" green="0.32549019610000002" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="dXb-qx-ZSJ" style="IBUITableViewCellStyleDefault" id="zZQ-ou-U7c">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="164" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zZQ-ou-U7c" id="Stg-Xr-oa8">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -1219,7 +1219,7 @@
                             <tableViewSection headerTitle="Application" footerTitle="" id="hhX-gy-hBu">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="VVm-cl-tiL" style="IBUITableViewCellStyleDefault" id="Dmb-nG-QoK">
-                                        <rect key="frame" x="0.0" y="208" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="272" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dmb-nG-QoK" id="wZA-aP-Wjl">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -1248,7 +1248,7 @@
                             <tableViewSection headerTitle="Settings" id="hxo-i2-twP">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="uxT-7J-JLs" style="IBUITableViewCellStyleDefault" id="c4g-ta-gsv">
-                                        <rect key="frame" x="0.0" y="309" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="373" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c4g-ta-gsv" id="Ut8-JT-nuE">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -1273,7 +1273,7 @@
                                         <color key="backgroundColor" red="0.30196078430000001" green="0.32549019610000002" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="OGV-tO-Mk2" style="IBUITableViewCellStyleDefault" id="qyl-Pe-dK4">
-                                        <rect key="frame" x="0.0" y="353" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="417" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qyl-Pe-dK4" id="hMF-O6-sxu">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -1298,7 +1298,7 @@
                                         <color key="backgroundColor" red="0.30196078430000001" green="0.32549019610000002" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="etU-4y-O2o" style="IBUITableViewCellStyleDefault" id="x5s-z0-GMq">
-                                        <rect key="frame" x="0.0" y="397" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="461" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="x5s-z0-GMq" id="e4s-ED-tFe">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -1329,10 +1329,11 @@
                             <outlet property="delegate" destination="Ssg-qf-9Bo" id="l03-Pt-c22"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="IxE-ia-ojl"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eo9-I9-4KB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1060" y="2347"/>
+            <point key="canvasLocation" x="1999.2" y="2346.4767616191907"/>
         </scene>
         <!--UserTimeLineViewController-->
         <scene sceneID="vfO-26-dkK">
@@ -2108,7 +2109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vQH-Qc-7un" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2282" y="2700"/>
+            <point key="canvasLocation" x="3220" y="2699.1004497751128"/>
         </scene>
         <!--Accounts View Controller-->
         <scene sceneID="jiY-JH-4DQ">
@@ -2239,7 +2240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zE-MR-QIy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3360.8000000000002" y="2542.5787106446778"/>
+            <point key="canvasLocation" x="4300" y="2542.5787106446778"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="prJ-8Z-iaP">
@@ -2277,6 +2278,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dN1-yi-lni" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3472.8000000000002" y="1298.5007496251876"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WpP-Ty-k6v">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nge-ty-6Rh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lu2-zD-Vcx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ssg-qf-9Bo" kind="relationship" relationship="rootViewController" id="PUv-ok-XsY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ze0-8D-q21" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1060" y="2346.4767616191907"/>
         </scene>
     </scenes>
     <resources>
