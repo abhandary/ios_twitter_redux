@@ -1347,18 +1347,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="688"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hpi-07-QFV" userLabel="Mask View">
-                                <frame key="frameInset" width="375" height="688"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="7oo-zX-WeS" appends="YES" id="a3J-fi-wfk"/>
-                                </connections>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbT-99-QBE" userLabel="Top Level View">
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hoe-8t-Q8t" userLabel="Header View">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hoe-8t-Q8t" userLabel="Header View">
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7g3-WO-CMw" userLabel="Header View Top Half">
                                                 <subviews>
@@ -1391,7 +1382,7 @@
                                                     <constraint firstItem="vVU-1E-fbF" firstAttribute="top" secondItem="7g3-WO-CMw" secondAttribute="top" id="XHV-tL-9Tl"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbH-EM-OD2" userLabel="Header View Bottom Half">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbH-EM-OD2" userLabel="Header View Bottom Half">
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQg-mR-4nS" userLabel="Page 1">
                                                         <subviews>
@@ -1414,7 +1405,7 @@
                                                             <constraint firstItem="8hd-ya-r5V" firstAttribute="top" secondItem="aQg-mR-4nS" secondAttribute="top" constant="5" id="xWn-mT-ZZP"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vey-5b-IBg" userLabel="Page 2">
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vey-5b-IBg" userLabel="Page 2">
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Axa Bhandary" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjy-wc-GWg" userLabel="Description">
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -2039,11 +2030,22 @@
                                     <constraint firstItem="Hoe-8t-Q8t" firstAttribute="leading" secondItem="hbT-99-QBE" secondAttribute="leading" id="xzn-TX-1WT"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hpi-07-QFV" userLabel="Mask View">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="7oo-zX-WeS" appends="YES" id="a3J-fi-wfk"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
+                            <constraint firstItem="Hpi-07-QFV" firstAttribute="leading" secondItem="hCE-1X-gM6" secondAttribute="leading" id="9aL-Br-1Vg"/>
                             <constraint firstAttribute="trailing" secondItem="hbT-99-QBE" secondAttribute="trailing" id="BUF-tT-34y"/>
                             <constraint firstItem="hbT-99-QBE" firstAttribute="top" secondItem="hCE-1X-gM6" secondAttribute="top" id="FMh-HO-0Zg"/>
+                            <constraint firstItem="Hpi-07-QFV" firstAttribute="top" secondItem="hCE-1X-gM6" secondAttribute="top" id="O8h-Fy-6oR"/>
+                            <constraint firstAttribute="trailing" secondItem="Hpi-07-QFV" secondAttribute="trailing" id="aUl-nb-jcc"/>
+                            <constraint firstAttribute="bottom" secondItem="Hpi-07-QFV" secondAttribute="bottom" id="gwn-II-Wsu"/>
                             <constraint firstItem="hbT-99-QBE" firstAttribute="leading" secondItem="hCE-1X-gM6" secondAttribute="leading" id="ta5-kI-m6s"/>
                             <constraint firstAttribute="bottom" secondItem="hbT-99-QBE" secondAttribute="bottom" id="yS6-8I-buU"/>
                         </constraints>
