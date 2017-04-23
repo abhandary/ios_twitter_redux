@@ -116,7 +116,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         
         
         let panGR = UIPanGestureRecognizer(target: self, action: #selector(headeriewPanGesture(_:)));
-        headerView.addGestureRecognizer(panGR)
+        headerViewBottomHalf.addGestureRecognizer(panGR)
         
         // setup tap gs on mask view
         let tapGS = UITapGestureRecognizer(target: self, action: #selector(maskViewTapped))
@@ -147,8 +147,23 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
             userName.text = user.name
             screenName.text = "@\(user.screename!)"
             
-            numberFollowersLabel.text = "\(user.followersCount ?? 0)"
-            numberFollowingLabel.text = "\(user.followingCount ?? 0)"
+            numberFollowersLabel.text = "0"
+            if let followersCount = user.followersCount {
+                if followersCount > 999 {
+                    numberFollowersLabel.text = "\(followersCount / 1000) k"
+                } else {
+                    numberFollowersLabel.text = "\(followersCount)"
+                }
+            }
+            
+            numberFollowingLabel.text = "0"
+            if let followingCount = user.followingCount {
+                if followingCount > 999 {
+                    numberFollowingLabel.text = "\(followingCount / 1000) k"
+                } else {
+                    numberFollowingLabel.text = "\(followingCount)"
+                }
+            }
         }
     }
     
@@ -225,22 +240,8 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         let point = sender.translation(in: self.view)
         
         if sender.state == .began {
-            
             headerGROriginalPoint = point
             page1LeadingConstraintStart = page1LeadingConstraint.constant
-            
-            if velocity.y > 0 {
-                // self.topLevelViewToTopConstraint.constant = -(self.headerView.frame.height - 44)
-                print("started moving down")
-            } else {
-                // self.topLevelViewToTopConstraint.constant = 0
-                print("stated moving up")
-            }
-            if velocity.x > 0 {
-                print("started moving right")
-            } else {
-                print("started moving left")
-            }
         } else if sender.state == .changed {
             
             if velocity.x > 0 {
@@ -254,14 +255,6 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
                     page1LeadingConstraint.constant = point.x
                 }
             }
-            else if velocity.y > 0 {
-                // self.topLevelViewToTopConstraint.constant = -(self.headerView.frame.height - 44)
-                print("moving down")
-            } else {
-                // self.topLevelViewToTopConstraint.constant = 0
-                print("moving up")
-            }
-            
         } else {
             if velocity.x > 0 {
                 moveHeader(left: true)
