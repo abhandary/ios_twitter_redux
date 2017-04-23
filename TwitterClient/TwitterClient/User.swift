@@ -17,6 +17,7 @@ class User  {
     var profileURL : URL?
     var tagline : String?
     var userID : Int?
+    var description : String?
     
     var dictionary : NSDictionary?
     
@@ -33,6 +34,8 @@ class User  {
         if let urlString = dictionary["profile_image_url_https"] as? String {
             profileURL = URL(string: urlString);
         }
+        
+        description = dictionary["description"] as? String
         
         if let urlString = dictionary["profile_background_image_url_https"] as? String {
             profileBackgroundURL = URL(string: urlString)

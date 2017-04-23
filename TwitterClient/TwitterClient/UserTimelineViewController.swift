@@ -26,26 +26,29 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     @IBOutlet weak var topLevelViewToTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var topLevelViewTrailingSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var topLevelViewLeadingSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var page1LeadingConstraint: NSLayoutConstraint!
+    var headerGROriginalPoint : CGPoint?
+    var page1LeadingConstraintStart : CGFloat?
+    
+    // page control
+    @IBOutlet weak var pageControl: UIPageControl!
     
     
-    
+    // header view and subviews
+    @IBOutlet weak var headerViewBottomHalf: UIView!
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var topLevelView: UIView!
-    
     @IBOutlet weak var backdropImageView: UIImageView!
     @IBOutlet weak var whiteViewAroundProfileImageView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
-    
     @IBOutlet weak var numberTweetsLabel: UILabel!
-    
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var screenName: UILabel!
     @IBOutlet weak var numberFollowingLabel: UILabel!
-    
     @IBOutlet weak var numberFollowersLabel: UILabel!
+    @IBOutlet weak var userDescription: UILabel!
 
     
-    @IBOutlet weak var headerViewBottomHalf: UIView!
-    @IBOutlet weak var headerView: UIView!
     
     // view list of accounts, to enable switching accounts
     var accountsVC : AccountsViewController?
@@ -65,46 +68,65 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     
     var accountViewState : AccountViewState = .notPresented
     
+    // MARK: - view setup and related
     override func viewDidLoad() {
         
-        
-        // setup long press gesture recognizer
-        let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
-        longPressGR.delegate = self
-        self.tabBarController!.tabBar.addGestureRecognizer(longPressGR)
-        
+        super.viewDidLoad()
 
-        let panGR = UIPanGestureRecognizer(target: self, action: #selector(headeriewPanGesture(_:)));
-        headerView.addGestureRecognizer(panGR)
-        
-        // setup tap gs on mask view
-        let tapGS = UITapGestureRecognizer(target: self, action: #selector(maskViewTapped))
-        maskView.addGestureRecognizer(tapGS)
+        // setup gesture recognizers
+        setupGestureRecognizers()
         
         // setup accounts view
+        setupAccountsView()
+
+        // setup table view, this is also done in super view
+        self.tableView.delegate = self
+
+        // setup header view
+        setupHeaderView()
+        
+        // set profile image and backdrop image
+        updateProfileHeader()
+        
+        // configure page control
+        setupPageControl()
+    }
+    
+    func setupHeaderView() {
+        profileImageView.layer.cornerRadius = 5
+        profileImageView.clipsToBounds = true
+        whiteViewAroundProfileImageView.layer.cornerRadius = 5
+        whiteViewAroundProfileImageView.clipsToBounds = true
+    }
+    
+    func setupAccountsView() {
         accountsVC = AppDelegate.storyboard.instantiateViewController(withIdentifier: AppDelegate.kAccountsViewController) as? AccountsViewController
         accountsVC?.delegate = self
         accountsVCView = accountsVC?.view
         self.tabBarController?.view.addSubview(accountsVCView!)
         accountsVCView?.frame = (accountsVCView?.frame.offsetBy(dx: 0, dy: self.view.frame.size.height))!
         self.tabBarController?.addChildViewController(accountsVC!)
-
+    }
+    
+    func setupGestureRecognizers() {
+        // setup long press gesture recognizer
+        let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+        longPressGR.delegate = self
+        self.tabBarController!.tabBar.addGestureRecognizer(longPressGR)
         
-        self.tableView.delegate = self
-
-        // set profile image and backdrop image
-        profileImageView.layer.cornerRadius = 5
-        profileImageView.clipsToBounds = true
-        whiteViewAroundProfileImageView.layer.cornerRadius = 5
-        whiteViewAroundProfileImageView.clipsToBounds = true
         
-        updateProfileHeader()
+        let panGR = UIPanGestureRecognizer(target: self, action: #selector(headeriewPanGesture(_:)));
+        headerView.addGestureRecognizer(panGR)
         
-        // defer super till this view has been setup
-        super.viewDidLoad()
-        
-
-        // Do any additional setup after loading the view.
+        // setup tap gs on mask view
+        let tapGS = UITapGestureRecognizer(target: self, action: #selector(maskViewTapped))
+        maskView.addGestureRecognizer(tapGS)
+    }
+    
+    func setupPageControl() {
+        self.pageControl.numberOfPages = 2
+        self.pageControl.currentPage = 0
+        self.pageControl.frame = self.headerView.frame
     }
     
     func updateProfileHeader() {
@@ -115,6 +137,13 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
             if let profileURL = user.profileURL {
                 profileImageView.setImageWith(profileURL)
             }
+            
+            if let profileBGURL = user.profileBackgroundURL {
+                backdropImageView.setImageWith(profileBGURL)
+            }
+            
+            userDescription.text = user.description
+            
             userName.text = user.name
             screenName.text = "@\(user.screename!)"
             
@@ -122,6 +151,9 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
             numberFollowingLabel.text = "\(user.followingCount ?? 0)"
         }
     }
+    
+    
+    // MARK: - gesture recognizer handlers
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return self.tabBarController!.tabBar.selectedItem!.tag == AppDelegate.kMeTab;
@@ -191,26 +223,67 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         
         let velocity = sender.velocity(in: self.view)
         let point = sender.translation(in: self.view)
-        print(point)
-        print(velocity)
         
         if sender.state == .began {
+            
+            headerGROriginalPoint = point
+            page1LeadingConstraintStart = page1LeadingConstraint.constant
+            
             if velocity.y > 0 {
-                self.topLevelViewToTopConstraint.constant = -(self.headerView.frame.height - 44)
+                // self.topLevelViewToTopConstraint.constant = -(self.headerView.frame.height - 44)
+                print("started moving down")
             } else {
-                self.topLevelViewToTopConstraint.constant = 0
+                // self.topLevelViewToTopConstraint.constant = 0
+                print("stated moving up")
+            }
+            if velocity.x > 0 {
+                print("started moving right")
+            } else {
+                print("started moving left")
             }
         } else if sender.state == .changed {
-            if point.y > 0 {
-                self.topLevelViewToTopConstraint.constant = 0
-            } else {
-                self.topLevelViewToTopConstraint.constant = point.y
+            
+            if velocity.x > 0 {
+                page1LeadingConstraint.constant = page1LeadingConstraintStart! + (point.x - headerGROriginalPoint!.x)
+                if page1LeadingConstraint.constant > 0 {
+                   page1LeadingConstraint.constant = 0
+                }
+            } else if velocity.x < 0 {
+                
+                if page1LeadingConstraint.constant > -self.headerView.frame.width {
+                    page1LeadingConstraint.constant = point.x
+                }
             }
+            else if velocity.y > 0 {
+                // self.topLevelViewToTopConstraint.constant = -(self.headerView.frame.height - 44)
+                print("moving down")
+            } else {
+                // self.topLevelViewToTopConstraint.constant = 0
+                print("moving up")
+            }
+            
         } else {
-            moveHeader(collapse: velocity.y <= 0)
+            if velocity.x > 0 {
+                moveHeader(left: true)
+            } else {
+                moveHeader(left: false)
+            }
         }
     }
 
+    
+    func moveHeader(left : Bool) {
+        UIView.animate(withDuration: 0.4) {
+            if left == true {
+                self.page1LeadingConstraint.constant = 0
+                self.pageControl.currentPage = 0
+            } else {
+                self.page1LeadingConstraint.constant = -self.headerView.frame.width
+                self.pageControl.currentPage = 1
+            }
+            self.headerView.layoutIfNeeded()
+        }
+    }
     
     func moveHeader(collapse : Bool) {
         DispatchQueue.main.async {
@@ -274,7 +347,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     
     
     /*
-    // MARK: - Navigation
+
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -282,6 +355,8 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - navigation
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
@@ -315,6 +390,9 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         }
     }
 
+    @IBAction func pageControlChanged(_ sender: UIPageControl) {
+        print(sender.currentPage)
+    }
 }
 
 extension UserTimelineViewController : AccountsViewControllerDelegate {
