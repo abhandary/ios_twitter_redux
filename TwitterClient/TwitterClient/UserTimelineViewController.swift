@@ -384,7 +384,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     }
 
     @IBAction func pageControlChanged(_ sender: UIPageControl) {
-        print(sender.currentPage)
+        moveHeader(left: sender.currentPage == 0)
     }
 }
 
