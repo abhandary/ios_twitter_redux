@@ -30,15 +30,17 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     var headerGROriginalPoint : CGPoint?
     var page1LeadingConstraintStart : CGFloat?
     
+    @IBOutlet weak var topLevelViewToBottomConstraint: NSLayoutConstraint!
+    
     // page control
     @IBOutlet weak var pageControl: UIPageControl!
-    
+
+        @IBOutlet weak var topLevelView: UIView!
     
     // header view and subviews
     @IBOutlet weak var headerViewBottomHalf: UIView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerViewTopHalf: UIView!
-    @IBOutlet weak var topLevelView: UIView!
     @IBOutlet weak var backdropImageView: UIImageView!
     @IBOutlet weak var whiteViewAroundProfileImageView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -122,6 +124,9 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         // setup tap gs on mask view
         let tapGS = UITapGestureRecognizer(target: self, action: #selector(maskViewTapped))
         maskView.addGestureRecognizer(tapGS)
+        
+        let headerTopPanGR = UIPanGestureRecognizer(target: self, action: #selector(headerViewTopHalfPanGesture(_:)))
+        headerViewTopHalf.addGestureRecognizer(headerTopPanGR)
     }
     
     func setupPageControl() {
@@ -235,6 +240,31 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
             
     }
 
+
+    func headerViewTopHalfPanGesture(_ sender: UIPanGestureRecognizer) {
+        let velocity = sender.velocity(in: self.view)
+        let point = sender.translation(in: self.view)
+
+        if sender.state == .began {
+            headerGROriginalPoint = point
+        } else if sender.state == .changed {
+            if velocity.y > 0 {
+                topLevelViewToBottomConstraint.constant = -point.y
+                print(topLevelViewToBottomConstraint.constant)
+            }
+        } else {
+            moveTopViewBackToOriginalPos()
+        }
+    }
+    
+    func moveTopViewBackToOriginalPos() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.4, animations: { 
+                self.topLevelViewToBottomConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
     
     func headeriewPanGesture(_ sender: UIPanGestureRecognizer) {
         

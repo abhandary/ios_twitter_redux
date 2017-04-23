@@ -1377,12 +1377,12 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="jfx-v4-55O" secondAttribute="bottom" id="17F-MR-9DI"/>
                                                     <constraint firstItem="jC0-45-9Az" firstAttribute="height" secondItem="vVU-1E-fbF" secondAttribute="height" id="93Q-Dx-LYd"/>
                                                     <constraint firstItem="jC0-45-9Az" firstAttribute="leading" secondItem="7g3-WO-CMw" secondAttribute="leading" id="IQs-vA-J3v"/>
                                                     <constraint firstAttribute="trailing" secondItem="vVU-1E-fbF" secondAttribute="trailing" id="Mob-Wc-XD3"/>
                                                     <constraint firstItem="vVU-1E-fbF" firstAttribute="leading" secondItem="7g3-WO-CMw" secondAttribute="leading" id="NTx-hC-8BG"/>
                                                     <constraint firstItem="jfx-v4-55O" firstAttribute="leading" secondItem="7g3-WO-CMw" secondAttribute="leading" constant="20" id="Nza-5E-BaC"/>
+                                                    <constraint firstItem="jfx-v4-55O" firstAttribute="bottom" secondItem="vVU-1E-fbF" secondAttribute="bottom" constant="30" id="T3Y-rS-vvK"/>
                                                     <constraint firstItem="vVU-1E-fbF" firstAttribute="height" secondItem="7g3-WO-CMw" secondAttribute="height" multiplier="0.7" id="VyU-zh-cur"/>
                                                     <constraint firstItem="vVU-1E-fbF" firstAttribute="top" secondItem="7g3-WO-CMw" secondAttribute="top" id="XHV-tL-9Tl"/>
                                                     <constraint firstItem="jC0-45-9Az" firstAttribute="top" secondItem="7g3-WO-CMw" secondAttribute="top" id="tTf-rY-X6F"/>
@@ -1492,16 +1492,15 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="Huu-qS-ZgT" firstAttribute="top" secondItem="vVU-1E-fbF" secondAttribute="bottom" constant="3" id="1Rq-Jd-qNi"/>
                                             <constraint firstAttribute="bottom" secondItem="tbH-EM-OD2" secondAttribute="bottom" id="58E-LY-2HP"/>
-                                            <constraint firstItem="Huu-qS-ZgT" firstAttribute="centerY" secondItem="Hoe-8t-Q8t" secondAttribute="centerY" id="BuQ-Gh-Eyy"/>
+                                            <constraint firstItem="tbH-EM-OD2" firstAttribute="top" secondItem="7g3-WO-CMw" secondAttribute="bottom" id="C41-Yi-UnZ"/>
                                             <constraint firstItem="tbH-EM-OD2" firstAttribute="leading" secondItem="Hoe-8t-Q8t" secondAttribute="leading" id="Dyx-cN-xzc"/>
-                                            <constraint firstItem="tbH-EM-OD2" firstAttribute="height" secondItem="Hoe-8t-Q8t" secondAttribute="height" multiplier="0.4" constant="1" id="FBc-vj-vkX"/>
                                             <constraint firstAttribute="trailing" secondItem="7g3-WO-CMw" secondAttribute="trailing" id="GAo-U6-M0N"/>
                                             <constraint firstItem="tbH-EM-OD2" firstAttribute="width" secondItem="Hoe-8t-Q8t" secondAttribute="width" multiplier="2" constant="1" id="JLg-wu-2LM"/>
                                             <constraint firstItem="7g3-WO-CMw" firstAttribute="leading" secondItem="Hoe-8t-Q8t" secondAttribute="leading" id="OPD-iv-FKH"/>
                                             <constraint firstItem="7g3-WO-CMw" firstAttribute="top" secondItem="Hoe-8t-Q8t" secondAttribute="top" id="Qpo-K3-8qY"/>
-                                            <constraint firstItem="7g3-WO-CMw" firstAttribute="height" secondItem="Hoe-8t-Q8t" secondAttribute="height" multiplier="0.6" id="WHd-sc-Y9W"/>
-                                            <constraint firstItem="Huu-qS-ZgT" firstAttribute="centerX" secondItem="Hoe-8t-Q8t" secondAttribute="centerX" id="iJE-NE-vb6"/>
+                                            <constraint firstItem="Huu-qS-ZgT" firstAttribute="centerX" secondItem="Hoe-8t-Q8t" secondAttribute="centerX" id="lNr-Sd-GOa"/>
                                         </constraints>
                                     </view>
                                     <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNr-iS-IHi" userLabel="separator">
@@ -2047,6 +2046,7 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
+                            <constraint firstItem="tbH-EM-OD2" firstAttribute="height" secondItem="hCE-1X-gM6" secondAttribute="height" multiplier="0.1" constant="1" id="8lj-4R-UTU"/>
                             <constraint firstItem="Hpi-07-QFV" firstAttribute="leading" secondItem="hCE-1X-gM6" secondAttribute="leading" id="9aL-Br-1Vg"/>
                             <constraint firstAttribute="trailing" secondItem="hbT-99-QBE" secondAttribute="trailing" id="BUF-tT-34y"/>
                             <constraint firstItem="hbT-99-QBE" firstAttribute="top" secondItem="hCE-1X-gM6" secondAttribute="top" id="FMh-HO-0Zg"/>
@@ -2078,6 +2078,7 @@
                         <outlet property="tableView" destination="arF-OQ-ssK" id="wbU-xW-Nhg"/>
                         <outlet property="topLevelView" destination="hbT-99-QBE" id="deW-1s-Uel"/>
                         <outlet property="topLevelViewLeadingSpaceConstraint" destination="ta5-kI-m6s" id="9mf-zv-Hsk"/>
+                        <outlet property="topLevelViewToBottomConstraint" destination="yS6-8I-buU" id="5NW-gL-bLd"/>
                         <outlet property="topLevelViewToTopConstraint" destination="FMh-HO-0Zg" id="oYv-yb-xdJ"/>
                         <outlet property="topLevelViewTrailingSpaceConstraint" destination="BUF-tT-34y" id="hyo-St-hHy"/>
                         <outlet property="userDescription" destination="xjy-wc-GWg" id="wXX-Sa-0Kn"/>
