@@ -37,6 +37,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     // header view and subviews
     @IBOutlet weak var headerViewBottomHalf: UIView!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var headerViewTopHalf: UIView!
     @IBOutlet weak var topLevelView: UIView!
     @IBOutlet weak var backdropImageView: UIImageView!
     @IBOutlet weak var whiteViewAroundProfileImageView: UIView!
@@ -47,7 +48,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     @IBOutlet weak var numberFollowingLabel: UILabel!
     @IBOutlet weak var numberFollowersLabel: UILabel!
     @IBOutlet weak var userDescription: UILabel!
-
+    @IBOutlet weak var blurViewForBackdrop: UIView!
     
     
     // view list of accounts, to enable switching accounts
@@ -234,6 +235,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
             
     }
 
+    
     func headeriewPanGesture(_ sender: UIPanGestureRecognizer) {
         
         let velocity = sender.velocity(in: self.view)
@@ -248,11 +250,16 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
                 page1LeadingConstraint.constant = page1LeadingConstraintStart! + (point.x - headerGROriginalPoint!.x)
                 if page1LeadingConstraint.constant > 0 {
                    page1LeadingConstraint.constant = 0
+                } else {
+                    let fraction = (-page1LeadingConstraint.constant / self.headerView.frame.width) * 0.3
+                    self.blurViewForBackdrop.alpha = fraction
                 }
             } else if velocity.x < 0 {
                 
                 if page1LeadingConstraint.constant > -self.headerView.frame.width {
                     page1LeadingConstraint.constant = point.x
+                    let fraction = (-page1LeadingConstraint.constant / self.headerView.frame.width) * 0.3
+                    self.blurViewForBackdrop.alpha = fraction
                 }
             }
         } else {
@@ -270,9 +277,11 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
             if left == true {
                 self.page1LeadingConstraint.constant = 0
                 self.pageControl.currentPage = 0
+                self.blurViewForBackdrop.alpha = 0.0
             } else {
                 self.page1LeadingConstraint.constant = -self.headerView.frame.width
                 self.pageControl.currentPage = 1
+                self.blurViewForBackdrop.alpha = 0.3
             }
             self.headerView.layoutIfNeeded()
         }

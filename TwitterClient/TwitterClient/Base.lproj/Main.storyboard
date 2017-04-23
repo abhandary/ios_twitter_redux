@@ -1354,6 +1354,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7g3-WO-CMw" userLabel="Header View Top Half">
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vVU-1E-fbF" userLabel="Backdrop Image"/>
+                                                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jC0-45-9Az" userLabel="backdrop image blur view">
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jfx-v4-55O" userLabel="white view around profile image">
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i5I-fP-EbZ" userLabel="Profile Image">
@@ -1375,11 +1378,15 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="jfx-v4-55O" secondAttribute="bottom" id="17F-MR-9DI"/>
+                                                    <constraint firstItem="jC0-45-9Az" firstAttribute="height" secondItem="vVU-1E-fbF" secondAttribute="height" id="93Q-Dx-LYd"/>
+                                                    <constraint firstItem="jC0-45-9Az" firstAttribute="leading" secondItem="7g3-WO-CMw" secondAttribute="leading" id="IQs-vA-J3v"/>
                                                     <constraint firstAttribute="trailing" secondItem="vVU-1E-fbF" secondAttribute="trailing" id="Mob-Wc-XD3"/>
                                                     <constraint firstItem="vVU-1E-fbF" firstAttribute="leading" secondItem="7g3-WO-CMw" secondAttribute="leading" id="NTx-hC-8BG"/>
                                                     <constraint firstItem="jfx-v4-55O" firstAttribute="leading" secondItem="7g3-WO-CMw" secondAttribute="leading" constant="20" id="Nza-5E-BaC"/>
                                                     <constraint firstItem="vVU-1E-fbF" firstAttribute="height" secondItem="7g3-WO-CMw" secondAttribute="height" multiplier="0.7" id="VyU-zh-cur"/>
                                                     <constraint firstItem="vVU-1E-fbF" firstAttribute="top" secondItem="7g3-WO-CMw" secondAttribute="top" id="XHV-tL-9Tl"/>
+                                                    <constraint firstItem="jC0-45-9Az" firstAttribute="top" secondItem="7g3-WO-CMw" secondAttribute="top" id="tTf-rY-X6F"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jC0-45-9Az" secondAttribute="trailing" id="x66-ew-GSW"/>
                                                 </constraints>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbH-EM-OD2" userLabel="Header View Bottom Half">
@@ -2056,8 +2063,10 @@
                     <size key="freeformSize" width="375" height="688"/>
                     <connections>
                         <outlet property="backdropImageView" destination="vVU-1E-fbF" id="Xjy-AX-Lgf"/>
+                        <outlet property="blurViewForBackdrop" destination="jC0-45-9Az" id="yr2-8q-zxy"/>
                         <outlet property="headerView" destination="Hoe-8t-Q8t" id="z6m-9F-ka3"/>
                         <outlet property="headerViewBottomHalf" destination="tbH-EM-OD2" id="wBx-Lm-70w"/>
+                        <outlet property="headerViewTopHalf" destination="7g3-WO-CMw" id="GBI-AG-E4X"/>
                         <outlet property="maskView" destination="Hpi-07-QFV" id="anI-o2-hlg"/>
                         <outlet property="networkErrorView" destination="3JW-bH-Onc" id="ZGv-z4-QBS"/>
                         <outlet property="numberFollowersLabel" destination="dmd-Io-Izg" id="rDt-XF-n48"/>
@@ -2320,6 +2329,13 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ze0-8D-q21" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1060" y="2346.4767616191907"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="5CW-pH-CaS">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="J7X-qq-vFF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d2K-N4-Dm4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>
