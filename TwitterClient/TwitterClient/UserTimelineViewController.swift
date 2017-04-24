@@ -250,7 +250,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         } else if sender.state == .changed {
             if velocity.y > 0 {
                 topLevelViewToBottomConstraint.constant = -point.y
-                print(topLevelViewToBottomConstraint.constant)
+                blurViewForBackdrop.alpha = point.y / self.headerView.frame.height * 0.3
             }
         } else {
             moveTopViewBackToOriginalPos()
@@ -258,12 +258,28 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     }
     
     func moveTopViewBackToOriginalPos() {
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.4, animations: { 
-                self.topLevelViewToBottomConstraint.constant = 0
-                self.view.layoutIfNeeded()
+
+        guard user != nil else { return; }
+        
+        let hud = MBProgressHUD.showAdded(to: self.headerViewTopHalf, animated: true);
+        if self.topLevelViewToBottomConstraint.constant < 0 {
+            UserAccountManagement.sharedInstance.currentUserAccount.fetchTweets(user : user!, success: { (tweets) in
+                self.tweets = tweets
+                self.tableView.reloadData()
+                }, error: { (receivedError) in
+                    ViewUtils.showToast(view: self.networkErrorView)
+                    print(receivedError)
             })
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            hud.hide(animated: true);
+            UIView.animate(withDuration: 0.4, animations: {
+                self.topLevelViewToBottomConstraint.constant = 0
+                self.blurViewForBackdrop.alpha = 0
+                self.view.layoutIfNeeded()
+            })
+        })
     }
     
     func headeriewPanGesture(_ sender: UIPanGestureRecognizer) {
@@ -333,14 +349,14 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     override func reloadTable() {
         
         if let user = user {
-            let hud = MBProgressHUD.showAdded(to: self.tableView, animated: true);
+            self.refreshControl.beginRefreshing()
             UserAccountManagement.sharedInstance.currentUserAccount.fetchTweets(user : user, success: { (tweets) in
-                hud.hide(animated: true);
+                // hud.hide(animated: true);
                 self.tweets = tweets
                 self.refreshControl.endRefreshing()
                 self.tableView.reloadData()
                 }, error: { (receivedError) in
-                    hud.hide(animated: true);
+                    // hud.hide(animated: true);
                     ViewUtils.showToast(view: self.networkErrorView)
                     self.refreshControl.endRefreshing()
                     print(receivedError)
