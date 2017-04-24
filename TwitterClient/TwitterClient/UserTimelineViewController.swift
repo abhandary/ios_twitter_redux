@@ -34,8 +34,8 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
     
     // page control
     @IBOutlet weak var pageControl: UIPageControl!
-
-        @IBOutlet weak var topLevelView: UIView!
+    @IBOutlet weak var topLevelView: UIView!
+    @IBOutlet weak var hamburgerIcon: UIImageView!
     
     // header view and subviews
     @IBOutlet weak var headerViewBottomHalf: UIView!
@@ -127,6 +127,9 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         
         let headerTopPanGR = UIPanGestureRecognizer(target: self, action: #selector(headerViewTopHalfPanGesture(_:)))
         headerViewTopHalf.addGestureRecognizer(headerTopPanGR)
+        
+        let hamburgerIconTapped = UITapGestureRecognizer(target: self, action: #selector(hamburgerIconTapped(_:)))
+        hamburgerIcon.addGestureRecognizer(hamburgerIconTapped)
     }
     
     func setupPageControl() {
@@ -140,6 +143,7 @@ class UserTimelineViewController: TimeLineViewController, UIGestureRecognizerDel
         // default to the current user is a user wasn't passed in
         user = user ?? UserAccountManagement.sharedInstance.currentUserAccount.user
         if let  user = user {
+            print(user.dictionary)
             if let profileURL = user.profileURL {
                 profileImageView.setImageWith(profileURL)
             }

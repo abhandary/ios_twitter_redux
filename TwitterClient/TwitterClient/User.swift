@@ -37,7 +37,7 @@ class User  {
         
         description = dictionary["description"] as? String
         
-        if let urlString = dictionary["profile_background_image_url_https"] as? String {
+        if let urlString = dictionary["profile_banner_url"] as? String {
             profileBackgroundURL = URL(string: urlString)
         }
         

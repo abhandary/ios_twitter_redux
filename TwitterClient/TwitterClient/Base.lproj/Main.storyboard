@@ -2016,6 +2016,13 @@
                                             <constraint firstItem="zH6-jY-da5" firstAttribute="centerX" secondItem="3JW-bH-Onc" secondAttribute="centerX" id="vHz-90-16a"/>
                                         </constraints>
                                     </view>
+                                    <imageView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hamburger_icon" translatesAutoresizingMaskIntoConstraints="NO" id="7iT-ox-JTt" userLabel="hamburger icon">
+                                        <color key="tintColor" red="0.1647058824" green="0.63529411759999999" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="lAB-0Z-D0V"/>
+                                            <constraint firstAttribute="width" constant="20" id="uVU-Ee-jUk"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -2025,6 +2032,7 @@
                                     <constraint firstItem="Hoe-8t-Q8t" firstAttribute="top" secondItem="hbT-99-QBE" secondAttribute="top" id="GcP-qL-Xfh"/>
                                     <constraint firstItem="CNr-iS-IHi" firstAttribute="top" secondItem="Hoe-8t-Q8t" secondAttribute="bottom" id="IPJ-4t-4Sh"/>
                                     <constraint firstItem="CNr-iS-IHi" firstAttribute="leading" secondItem="hbT-99-QBE" secondAttribute="leading" id="JmS-bc-SQr"/>
+                                    <constraint firstItem="7iT-ox-JTt" firstAttribute="top" secondItem="hbT-99-QBE" secondAttribute="top" constant="30" id="KsO-kD-gyv"/>
                                     <constraint firstAttribute="bottom" secondItem="3JW-bH-Onc" secondAttribute="bottom" constant="70" id="OjL-Ez-nQN"/>
                                     <constraint firstAttribute="bottom" secondItem="arF-OQ-ssK" secondAttribute="bottom" id="ZDo-hB-GY9"/>
                                     <constraint firstAttribute="trailing" secondItem="arF-OQ-ssK" secondAttribute="trailing" id="bhj-IG-qK1"/>
@@ -2032,6 +2040,7 @@
                                     <constraint firstAttribute="trailing" secondItem="3JW-bH-Onc" secondAttribute="trailing" id="myg-KI-OBN"/>
                                     <constraint firstItem="arF-OQ-ssK" firstAttribute="leading" secondItem="hbT-99-QBE" secondAttribute="leading" id="phM-lI-aiO"/>
                                     <constraint firstItem="arF-OQ-ssK" firstAttribute="top" secondItem="Hoe-8t-Q8t" secondAttribute="bottom" constant="3" id="qQQ-h6-6ve"/>
+                                    <constraint firstItem="7iT-ox-JTt" firstAttribute="leading" secondItem="hbT-99-QBE" secondAttribute="leading" constant="20" id="rBV-en-T2k"/>
                                     <constraint firstItem="Hoe-8t-Q8t" firstAttribute="height" secondItem="hbT-99-QBE" secondAttribute="height" multiplier="0.3" constant="1" id="ttT-2T-okb"/>
                                     <constraint firstItem="Hoe-8t-Q8t" firstAttribute="leading" secondItem="hbT-99-QBE" secondAttribute="leading" id="xzn-TX-1WT"/>
                                 </constraints>
@@ -2064,6 +2073,7 @@
                     <connections>
                         <outlet property="backdropImageView" destination="vVU-1E-fbF" id="Xjy-AX-Lgf"/>
                         <outlet property="blurViewForBackdrop" destination="jC0-45-9Az" id="yr2-8q-zxy"/>
+                        <outlet property="hamburgerIcon" destination="7iT-ox-JTt" id="tp9-Ly-jtS"/>
                         <outlet property="headerView" destination="Hoe-8t-Q8t" id="z6m-9F-ka3"/>
                         <outlet property="headerViewBottomHalf" destination="tbH-EM-OD2" id="wBx-Lm-70w"/>
                         <outlet property="headerViewTopHalf" destination="7g3-WO-CMw" id="GBI-AG-E4X"/>
@@ -2094,7 +2104,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2213.5999999999999" y="1648.8755622188908"/>
+            <point key="canvasLocation" x="2199" y="1661"/>
         </scene>
         <!--Add Account View Controller-->
         <scene sceneID="Nay-1M-6nO">
@@ -2344,7 +2354,7 @@
         <image name="compose" width="22" height="22"/>
         <image name="error_icon" width="30" height="30"/>
         <image name="favorite_icon" width="10" height="10"/>
-        <image name="hamburger_icon" width="30" height="30"/>
+        <image name="hamburger_icon" width="20" height="20"/>
         <image name="notretweeted" width="15" height="10"/>
         <image name="reply_icon" width="16" height="14"/>
         <image name="retweet_icon" width="10" height="10"/>
