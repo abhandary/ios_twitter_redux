@@ -61,8 +61,14 @@ class MenuViewController: UITableViewController {
             getTabBarController()?.selectedIndex = AppDelegate.kMeTab
         default:
             if indexPath.row == kSettingsAccounts {
-                AppDelegate.showAccountView = true
-                getTabBarController()?.selectedIndex = AppDelegate.kMeTab
+                if getTabBarController()?.selectedIndex != AppDelegate.kMeTab {
+                    AppDelegate.showAccountView = true
+                    getTabBarController()?.selectedIndex = AppDelegate.kMeTab
+                } else {
+                    if let userProfileVC = getTabBarController()?.viewControllers![AppDelegate.kMeTab] as? UserTimelineViewController {
+                        userProfileVC.showAccountsView()
+                    }
+                }
             } else if indexPath.row == kSettingsAbout {
                 
             } else if indexPath.row == kSettingsLogout {

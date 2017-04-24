@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     static let kAccountsViewController = "AccountsViewController"
     static let kAddAccountViewController = "AddAccountViewController"
     
+    static let kShowAccountsView = "kShowAccountsView"
     
     static let kHomeTab = 0
     static let kMentionsTab = 1
