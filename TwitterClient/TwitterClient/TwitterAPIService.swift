@@ -63,7 +63,7 @@ class TwitterAPIService {
         
         let params = [
                       kCountParam : kMaxTweetCountPerRequest,
-                      kMaxIDParam :lastSeenLowestTweetID
+                      kMaxIDParam :lastSeenLowestTweetID - 1
                       ]
         fetchTweets(kHomeTimeLine, params: params, success: success, error: error)
     }
@@ -88,7 +88,7 @@ class TwitterAPIService {
         
         let params = [
             kCountParam : kMaxTweetCountPerRequest,
-            kMaxIDParam :lastSeenLowestTweetID,
+            kMaxIDParam :lastSeenLowestTweetID - 1,
             kUserParam : user.userID!
         ]
         fetchTweets(kUserTimeLine, params: params, success: success, error: error)
@@ -114,7 +114,7 @@ class TwitterAPIService {
         
         let params = [
             kCountParam : kMaxTweetCountPerRequest,
-            kMaxIDParam :lastSeenLowestTweetID
+            kMaxIDParam :lastSeenLowestTweetID - 1
         ]
         fetchTweets(kMentionsTimeLine, params: params, success: success, error: error)
     }

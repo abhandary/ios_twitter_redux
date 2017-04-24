@@ -50,9 +50,35 @@ class TweetCell: UITableViewCell {
         }
     }
     
+    
+    func updateTweetText(text : String) {
+
+        tweetTextLabel.text = text
+        
+//        let pat = "@([a-zA-Z0-9]+)"
+//        let range = text.range(of: pat, options: .regularExpression, range: nil, locale: nil)
+//        
+//        if let range = range,
+//            range.isEmpty == false {
+//            let str = text.substring(with: range)
+//            let blueStrAttribute = [ NSForegroundColorAttributeName: UIColor.blue ]
+//            let attributedStr = NSMutableAttributedString(string: str, attributes: blueStrAttribute)
+//            let stringWithoutScreenName = text.replacingCharacters(in: range, with: " ")
+//            let attributedStringWithoutScreenName = NSAttributedString(string: stringWithoutScreenName)
+//            attributedStr.append(attributedStringWithoutScreenName)
+//            tweetTextLabel.attributedText = attributedStr
+//        } else {
+//
+//        }
+    }
+    
     func updateCellOnTweetSet() {
+        
         // tweet text
-        tweetTextLabel.text = tweet.text
+        if let text = tweet.text {
+            updateTweetText(text: text)
+        }
+
         
         // user name and screenname
         name.text = tweet.user?.name
