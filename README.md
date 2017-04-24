@@ -36,7 +36,7 @@ The following **additional** features are implemented:
 timeline and mentions.
 - [x] The menu has an additional 'Logout' and 'About' section
 - [x] Added a hamburger icon, which when tapped will toggle the reveal of the hamburger menu.
-- [x] In the accounts view, if the current account is deleted the user will be automatically switched to the next available account. If there are no other accounts available then the user will be logged out after a prompt. 
+- [x] In the accounts view, if the current account is deleted the user will be switched to the next available account. If there are no other accounts available then the user will be logged out after a prompt. 
 
 
 
