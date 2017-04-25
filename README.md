@@ -2,6 +2,9 @@
 
 Time spent: **23** hours spent in total
 
+Project Leaderboard Rank: 1 (out of 80 cohorts)
+
+
 ## User Stories
 
 The following **required** functionality is completed:
