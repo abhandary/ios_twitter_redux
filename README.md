@@ -2,7 +2,7 @@
 
 Time spent: **23** hours spent in total
 
-** Project Leaderboard Rank: 1 (out of 80 cohorts) **
+**Project Leaderboard Rank: 1 (out of 80 cohorts)**
 
 
 ## User Stories
