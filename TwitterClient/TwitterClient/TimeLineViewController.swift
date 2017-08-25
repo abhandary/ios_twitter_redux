@@ -200,7 +200,7 @@ extension TimeLineViewController : TweetCellDelegate {
                 ViewUtils.showToast(view: self.networkErrorView)
             }
 
-            if sender.tweet.favorited! == true {
+            if sender.tweet.favorited == true {
                 UserAccountManagement.sharedInstance.currentUserAccount.post(unfavoriteTweetID: tweetID, success:successBlock, error: errorBlock)
             } else {
                 UserAccountManagement.sharedInstance.currentUserAccount.post(favoriteTweetID: tweetID, success: successBlock, error:errorBlock)
@@ -229,7 +229,7 @@ extension TimeLineViewController : UITableViewDelegate, UITableViewDataSource {
         
         let tweet = self.tweets![indexPath.row]
         
-        if tweet.retweeted! == true {
+        if tweet.retweeted == true {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "RetweetCell") as! RetweetCell
             cell.tweet = self.tweets![indexPath.row]
             cell.delegate = self

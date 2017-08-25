@@ -171,7 +171,7 @@ class TweetCell: UITableViewCell {
         retweetCountLabel.text = String(tweet.retweetCount!)
         
         ViewUtils.transition(imageView: retweetImageView,
-                             imageNamed: tweet.retweeted! == true ? kRetweetedImage : kNotRetweetedImage,
+                             imageNamed: tweet.retweeted == true ? kRetweetedImage : kNotRetweetedImage,
                              duration: 0.1)
         
         self.setNeedsDisplay()
@@ -186,7 +186,7 @@ class TweetCell: UITableViewCell {
         
         // update favorite image as per favorite state
         ViewUtils.transition(imageView: favoriteImage,
-                             imageNamed: tweet.favorited! == true ? kFavoritedImage : kUnfavoritedImage,
+                             imageNamed: tweet.favorited == true ? kFavoritedImage : kUnfavoritedImage,
                              duration: 0.1)
         
 

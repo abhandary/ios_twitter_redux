@@ -146,7 +146,7 @@ class TweetDetailViewController: UIViewController {
             }
 
             
-            if tweet.favorited! == false {
+            if tweet.favorited == false {
                 UserAccountManagement.sharedInstance.currentUserAccount.post(favoriteTweetID: tweetID, success: successBlock, error: errorBlock)
             } else {
                 UserAccountManagement.sharedInstance.currentUserAccount.post(unfavoriteTweetID: tweetID, success: successBlock, error: errorBlock)
@@ -169,7 +169,7 @@ class TweetDetailViewController: UIViewController {
         
         if let tweet = tweet {
             ViewUtils.transition(imageView: self.retweetImageView,
-                                 imageNamed: tweet.retweeted! == true ? kRetweetedImage : kNotRetweetedImage,
+                                 imageNamed: tweet.retweeted == true ? kRetweetedImage : kNotRetweetedImage,
                                  duration: 0.1)
             self.retweetImageView.setNeedsDisplay()
         }
@@ -178,7 +178,7 @@ class TweetDetailViewController: UIViewController {
     func updateFavoritesImage() {
         if let tweet = tweet {
             ViewUtils.transition(imageView: self.favoritesImageView,
-                                 imageNamed: tweet.favorited! == true ? kFavoritedImage : kUnfavoritedImage,
+                                 imageNamed: tweet.favorited == true ? kFavoritedImage : kUnfavoritedImage,
                                  duration: 0.1)
             self.favoritesImageView.setNeedsDisplay()
         }

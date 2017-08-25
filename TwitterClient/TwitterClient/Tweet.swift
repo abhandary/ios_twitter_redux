@@ -24,8 +24,8 @@ class Tweet {
     
     let kMonthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     
-    var retweeted : Bool?
-    var favorited : Bool?
+    var retweeted = false
+    var favorited = false
     
     var user : User?
     
